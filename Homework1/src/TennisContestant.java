@@ -13,7 +13,10 @@ public class TennisContestant implements Contestant, Ranked {
 	}
 	
 	public int getRanking(){
-		return ranking;
+		if(ranking <= 1)
+			return 2;
+		else 
+			return ranking;
 	}
 	
 	public boolean hasBetterRanking(Ranked second){
