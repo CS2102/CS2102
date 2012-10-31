@@ -47,8 +47,7 @@ public class AdvanceMatch implements Tournament {
 		
 		// if they are not ranked, we only need to know if the players always advanced
 		if(!(conts[0] instanceof Ranked))
-			return this.matchesValid();
-		
+			return this.playersAlwaysAdvanced();
 		// now we have to deal with rankings,
 		// start by letting ranksValid be true
 		boolean ranksValid = true;
@@ -76,15 +75,15 @@ public class AdvanceMatch implements Tournament {
 			Ranked r1 = (Ranked) in.data.contestant1;
 			Ranked r2 = (Ranked) in.data.contestant2;
 			if(r1.hasBetterRanking(r2)){
-				if(r1.getRanking() < highCutoff ||
-						r2.getRanking() > lowCutoff){
+				if(r1.getRanking() > lowCutoff ||
+						r2.getRanking() < highCutoff){
 					ranksValid = false;
 					break;
 				}
 			}
 			else 
-				if(r1.getRanking() > lowCutoff ||
-						r2.getRanking() < highCutoff){
+				if(r1.getRanking() < highCutoff ||
+						r2.getRanking() > lowCutoff){
 					ranksValid = false;
 					break;
 				}
@@ -92,12 +91,12 @@ public class AdvanceMatch implements Tournament {
 		// now ranksValid is true only if every initial pairing consists of
 		// 2 ranked contestants with one in the upper half and one in the lower half
 		
-		return ranksValid && this.matchesValid();
+		return ranksValid && this.playersAlwaysAdvanced();
 	}
 	
 	// determines whether both contestants in this match came from the previous round,
 	// each from one of the feeder matches
-	public boolean matchesValid(){
+	public boolean playersAlwaysAdvanced(){
 		Contestant c1 = data.contestant1, c2 = data.contestant2;
 		Contestant[] previousRound = new Contestant[]{
 				feeder1.getData().contestant1,
@@ -116,13 +115,17 @@ public class AdvanceMatch implements Tournament {
 			     (c1.equals(previousRound[2]) || c1.equals(previousRound[3])));
 		// also make sure lower down matches are all valid
 		return isValid &&
-				feeder1.matchesValid() &&
-				feeder2.matchesValid();
+				feeder1.playersAlwaysAdvanced() &&
+				feeder2.playersAlwaysAdvanced();
 	}
 	
 	//get all leaves (initial matches) in this tournament match tree
 	public InitialMatch[] getLeaves(){
-		Collection<InitialMatch> leaves = Arrays.asList(feeder1.getLeaves());
+		ArrayList<InitialMatch> leaves = new ArrayList<InitialMatch>();
+		InitialMatch[] matches = feeder1.getLeaves();
+		for(int i = 0; i < matches.length; i++){
+			leaves.add(matches[i]);
+		}
 		Collections.addAll(leaves, feeder2.getLeaves());
 		return leaves.toArray(new InitialMatch[0]);
 	}

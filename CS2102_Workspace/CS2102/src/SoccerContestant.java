@@ -25,7 +25,7 @@ public class SoccerContestant implements Contestant, Team, Ranked {
 	}
 	
 	public int getRanking(){
-		if(ranking >= 1)
+		if(ranking <= 1)
 			return 2;
 		else 
 			return ranking;

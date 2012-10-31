@@ -15,7 +15,7 @@ public class InitialMatch implements Tournament {
 	}
 	
 	// always true since there are no feeder matches to check against
-	public boolean matchesValid(){
+	public boolean playersAlwaysAdvanced(){
 		return true;
 	}
 	

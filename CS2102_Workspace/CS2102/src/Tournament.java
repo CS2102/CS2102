@@ -6,7 +6,7 @@ public interface Tournament {
 	
 	boolean tourValid();
 	// helpers for tourValid()
-	boolean matchesValid();
+	boolean playersAlwaysAdvanced();
 	InitialMatch[] getLeaves();
 	
 	int matchesPlayed(String name);
