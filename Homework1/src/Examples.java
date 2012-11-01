@@ -43,9 +43,38 @@ public class Examples {
 		return t.checkExpect(t1.allScoresValid(), true);
 	}
 	
+	BaseballContestant b1 = new BaseballContestant("Team1", 20, "Cap1");
+	BaseballContestant b2 = new BaseballContestant("Team2", 20, "Cap2");
+	BaseballContestant b3 = new BaseballContestant("Team3", 20, "Cap3");
+	BaseballContestant b4 = new BaseballContestant("Team4", 20, "Cap4");
+	BaseballContestant b5 = new BaseballContestant("Team5", 20, "Cap5");
+	BaseballContestant b6 = new BaseballContestant("Team6", 20, "Cap6");
+	BaseballContestant b7 = new BaseballContestant("Team7", 20, "Cap7");
+	BaseballContestant b8 = new BaseballContestant("Team8", 20, "Cap8");
 	
+	//BaseballScore bScore = new BaseballScore(1, 0, 9);
+	BaseballScore bScore = new BaseballScore(1, 0, 8);
+	
+	Tournament t2 = new AdvanceMatch(
+			new MatchData(b1, b2, bScore),
+				new AdvanceMatch(
+					new MatchData(b1, b3, bScore),
+					new InitialMatch(
+						new MatchData(b3, b4, bScore)),
+					new InitialMatch(
+						new MatchData(b1, b5, bScore))),
+				new AdvanceMatch(
+					new MatchData(b2, b6, bScore),
+					new InitialMatch(
+						new MatchData(b2, b7, bScore)),
+					new InitialMatch(
+						new MatchData(b6, b8, bScore))));
+	
+	boolean test4(Tester t) {
+		return t.checkExpect(t2.tourValid(), false);
+	}
 	// ... more tests ...
-	boolean test4(Tester t){
+	boolean testx(Tester t){
 		// return t.checkExpect();
 		return true;
 	}
