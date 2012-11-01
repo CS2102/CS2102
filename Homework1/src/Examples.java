@@ -74,7 +74,7 @@ public class Examples {
 		return t.checkExpect(t2.tourValid(), false);
 	}
 	// ... more tests ...
-	boolean testx(Tester t){
+	boolean testx(Tester t) {
 		// return t.checkExpect();
 		return true;
 	}

@@ -17,8 +17,8 @@ public class AdvanceMatch implements Tournament {
 	
 	public boolean allScoresValid(){
 		return this.data.score.isValid() &&
-				feeder1.allScoresValid() &&
-				feeder2.allScoresValid();
+				this.feeder1.allScoresValid() &&
+				this.feeder2.allScoresValid();
 	}
 	
 	// determines whether this tournament is valid by checking:
