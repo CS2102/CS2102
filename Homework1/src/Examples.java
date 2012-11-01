@@ -130,10 +130,28 @@ public class Examples {
 	boolean test5(Tester t) {
 		return t.checkExpect(t3.tourValid(), true);
 	}
-	// ... more tests ...
-	boolean testx(Tester t) {
-		// return t.checkExpect();
-		return true;
+	
+	boolean test6(Tester t){
+		TennisScore s = new TennisScore(MatchType.men,
+				new TennisSet(5, 3),
+				new TennisSet(4, 2),
+				new TennisSet(3, 4),
+				new TennisSet(5, 1),
+				new TennisSet(3, 2),
+				new TennisSet(2, 1));
+		return t.checkExpect(s.isValid(), false);
+	}
+	
+	boolean test7(Tester t){
+		TennisScore s = new TennisScore(MatchType.women,
+				new TennisSet(2, 3));
+		return t.checkExpect(s.isValid(), true);
+	}
+	
+	boolean test8(Tester t){
+		TennisScore s = new TennisScore(MatchType.men,
+				new TennisSet(4, 5));
+		return t.checkExpect(s.isValid(), true);
 	}
 	
 }
