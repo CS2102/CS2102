@@ -5,6 +5,8 @@ public class Examples {
 	String hi = "hi";
 	
 	Score score = new SoccerScore(1, 0, false);
+	Score score2 = new SoccerScore(3, 3, true);
+	Score score3 = new SoccerScore(3, 3, false);
 	
 	SoccerContestant c1 = new SoccerContestant("name1", 2, 10, "cap1");
 	SoccerContestant c2 = new SoccerContestant("name2", 3, 10, "cap2");
@@ -30,6 +32,35 @@ public class Examples {
 					new InitialMatch(new MatchData(
 							c4, c8, score))));
 	
+	Tournament t1b = new AdvanceMatch(new MatchData(
+			c1, c2, score2),
+			new AdvanceMatch(new MatchData(
+					c1, c3, score2),
+					new InitialMatch(new MatchData(
+							c1, c5, score2)),
+					new InitialMatch(new MatchData(
+							c3, c7, score2))),
+			new AdvanceMatch(new MatchData(
+					c2, c4, score2),
+					new InitialMatch(new MatchData(
+							c2, c6, score2)),
+					new InitialMatch(new MatchData(
+							c4, c8, score2))));
+	
+	Tournament t1c = new AdvanceMatch(new MatchData(
+			c1, c2, score3),
+			new AdvanceMatch(new MatchData(
+					c1, c3, score3),
+					new InitialMatch(new MatchData(
+							c1, c5, score3)),
+					new InitialMatch(new MatchData(
+							c3, c7, score3))),
+			new AdvanceMatch(new MatchData(
+					c2, c4, score3),
+					new InitialMatch(new MatchData(
+							c2, c6, score3)),
+					new InitialMatch(new MatchData(
+							c4, c8, score3))));
 	
 	boolean test1(Tester t){
 		return t.checkExpect(hi, "hi");
@@ -37,6 +68,14 @@ public class Examples {
 	
 	boolean test2(Tester t){
 		return t.checkExpect(t1.tourValid(), true);
+	}
+	
+	boolean test2b(Tester t){
+		return t.checkExpect(t1b.tourValid(), true);
+	}
+	
+	boolean test2c(Tester t){
+		return t.checkExpect(t1c.tourValid(), false);
 	}
 	
 	boolean test3(Tester t){
@@ -70,8 +109,26 @@ public class Examples {
 					new InitialMatch(
 						new MatchData(b6, b8, bScore))));
 	
+	Tournament t3 = new AdvanceMatch(
+			new MatchData(b1, b2, bScore2),
+				new AdvanceMatch(
+					new MatchData(b1, b3, bScore2),
+					new InitialMatch(
+						new MatchData(b3, b4, bScore2)),
+					new InitialMatch(
+						new MatchData(b1, b5, bScore2))),
+				new AdvanceMatch(
+					new MatchData(b2, b6, bScore2),
+					new InitialMatch(
+						new MatchData(b2, b7, bScore2)),
+					new InitialMatch(
+						new MatchData(b6, b8, bScore2))));
+	
 	boolean test4(Tester t) {
 		return t.checkExpect(t2.tourValid(), false);
+	}
+	boolean test5(Tester t) {
+		return t.checkExpect(t3.tourValid(), true);
 	}
 	// ... more tests ...
 	boolean testx(Tester t) {
