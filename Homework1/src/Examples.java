@@ -52,8 +52,8 @@ public class Examples {
 	BaseballContestant b7 = new BaseballContestant("Team7", 20, "Cap7");
 	BaseballContestant b8 = new BaseballContestant("Team8", 20, "Cap8");
 	
-	//BaseballScore bScore = new BaseballScore(1, 0, 9);
 	BaseballScore bScore = new BaseballScore(1, 0, 8);
+	BaseballScore bScore2 = new BaseballScore(1, 0, 9);
 	
 	Tournament t2 = new AdvanceMatch(
 			new MatchData(b1, b2, bScore),

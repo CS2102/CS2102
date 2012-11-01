@@ -91,7 +91,7 @@ public class AdvanceMatch implements Tournament {
 		// now ranksValid is true only if every initial pairing consists of
 		// 2 ranked contestants with one in the upper half and one in the lower half
 		
-		return ranksValid && this.playersAlwaysAdvanced();
+		return this.allScoresValid() && ranksValid && this.playersAlwaysAdvanced();
 	}
 	
 	// determines whether both contestants in this match came from the previous round,
