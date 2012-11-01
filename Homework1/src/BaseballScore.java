@@ -11,6 +11,6 @@ public class BaseballScore implements Score {
 	}
 	
 	public boolean isValid(){
-		return (this.runs1 != this.runs2) && (this.innings >= 9);
+		return (runs1 != runs2) && (innings >= 9);
 	}
 }

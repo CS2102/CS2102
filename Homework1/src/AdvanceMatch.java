@@ -17,8 +17,8 @@ public class AdvanceMatch implements Tournament {
 	
 	public boolean allScoresValid(){
 		return this.data.score.isValid() &&
-				this.feeder1.allScoresValid() &&
-				this.feeder2.allScoresValid();
+				feeder1.allScoresValid() &&
+				feeder2.allScoresValid();
 	}
 	
 	// determines whether this tournament is valid by checking:
@@ -47,7 +47,7 @@ public class AdvanceMatch implements Tournament {
 		
 		// if they are not ranked, we only need to know if the players always advanced
 		if(!(conts[0] instanceof Ranked))
-			return this.playersAlwaysAdvanced() && this.allScoresValid();
+			return this.playersAlwaysAdvanced();
 		// now we have to deal with rankings,
 		// start by letting ranksValid be true
 		boolean ranksValid = true;
@@ -91,7 +91,7 @@ public class AdvanceMatch implements Tournament {
 		// now ranksValid is true only if every initial pairing consists of
 		// 2 ranked contestants with one in the upper half and one in the lower half
 		
-		return this.allScoresValid() && ranksValid && this.playersAlwaysAdvanced();
+		return ranksValid && this.playersAlwaysAdvanced();
 	}
 	
 	// determines whether both contestants in this match came from the previous round,
