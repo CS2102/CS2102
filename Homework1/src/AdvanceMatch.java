@@ -47,7 +47,7 @@ public class AdvanceMatch implements Tournament {
 		
 		// if they are not ranked, we only need to know if the players always advanced
 		if(!(conts[0] instanceof Ranked))
-			return this.playersAlwaysAdvanced();
+			return this.playersAlwaysAdvanced() && this.allScoresValid();
 		// now we have to deal with rankings,
 		// start by letting ranksValid be true
 		boolean ranksValid = true;
