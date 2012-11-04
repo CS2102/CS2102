@@ -12,4 +12,12 @@ public interface AVLTree {
 	boolean hasElem(int elem);
 
 	boolean isBalanced();
+	
+	int largestElem();
+	
+	int largestElem(int parentValue);
+	
+	int smallestElem();
+	
+	int smallestElem(int parentValue);
 }

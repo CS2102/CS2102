@@ -28,4 +28,20 @@ public class EmptyAVLTree implements AVLTree {
 		return true;
 	}
 
+	public int largestElem() {
+		return 0;
+	}
+
+	public int largestElem(int parentValue) {
+		return parentValue;
+	}
+
+	public int smallestElem() {
+		return 0;
+	}
+
+	public int smallestElem(int parentValue) {
+		return parentValue;
+	}
+
 }

@@ -68,5 +68,21 @@ public class DataAVLTree implements AVLTree {
 				leftChild.isBalanced() &&
 				rightChild.isBalanced();
 	}
+
+	public int largestElem() {
+		return this.rightChild.largestElem(this.elem);
+	}
+
+	public int largestElem(int parentValue) {
+		return this.rightChild.largestElem(this.elem);
+	}
+
+	public int smallestElem() {
+		return this.leftChild.smallestElem(this.elem);
+	}
+
+	public int smallestElem(int parentValue) {
+		return this.leftChild.smallestElem(this.elem);
+	}
 	
 }
