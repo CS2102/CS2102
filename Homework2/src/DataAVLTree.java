@@ -23,7 +23,6 @@ public class DataAVLTree implements AVLTree {
 		return this.leftChild.size() + this.rightChild.size() + 1;
 	}
 	
-	// produces the largest element in the BST
 	public int largestElem() {
 	  return this.rightChild.largestElem(this.elem);
 	}
@@ -39,8 +38,7 @@ public class DataAVLTree implements AVLTree {
 	public int smallestElem(int parentValue){
 		return this.leftChild.smallestElem(this.elem);
 	}
-	// ------------------------------------------------
-	
+
 	public AVLTree addElem(int elem) {
 		if (elem == this.elem)
 		      return this.rebalance(); // not storing duplicate values
@@ -56,6 +54,7 @@ public class DataAVLTree implements AVLTree {
 
 	// returns set containing all existing elements except the given element
 	public AVLTree remElem (int elem) {
+	// for each case, the AVLTree must call rebalance before returning
 	 if (elem == this.elem) {
 	     // four cases to consider.
          //
@@ -81,11 +80,10 @@ public class DataAVLTree implements AVLTree {
 		return rightSibling.mergeToRemoveParent(this);
 	}
 
-	// returns DataBST resulting from removing parent when both children are DataAVLTrees
+	// returns DataAVLTree resulting from removing parent when both children are DataAVLTrees
 	public AVLTree mergeToRemoveParent(AVLTree leftSibling) {
 		// "this" refers to the original right sibling of the parent being deleted
-		// here, could decide whether to use largest-in-left or smallest-in-right
-		// and branch accordingly.  
+		// here, randomly decide whether to use largest-in-left or smallest-in-right  
 		java.util.Random rand = new java.util.Random();
 		boolean leftSide = rand.nextBoolean();
 		if(leftSide){
@@ -104,7 +102,6 @@ public class DataAVLTree implements AVLTree {
 		}
 	}
 	
-
 	public boolean hasElem(int elem) {
 		if (elem == this.elem) 
 		      return true; 
@@ -118,33 +115,84 @@ public class DataAVLTree implements AVLTree {
 		if(this.isBalanced())
 			return this;
 		else {
-			// TODO: insert re-balance code here
-			// we already know the tree is not balanced,
-			// and we also know that it will only take exactly
-			// one or two rotations to balance it, so the next
-			// step is figuring out which, and then implementing
-			// them both
-			
-			return this;
+			// check right-right    P = -2, R = -1
+			//       right-left     P = -2, R = +1
+			//       left-left      P = +2, L = +1, and
+			//       left-right     P = +2, L = -1
+			// cases, rotate the tree appropriately in each case
+			// additional remElem cases:  P = 2 & L = 0, and P = -2 & R = 0
+			int pBalanceFactor = 
+					this.leftChild.height() -
+					this.rightChild.height();
+			if(pBalanceFactor == -2){
+				// if the right tree is 2 nodes higher than left,
+				// the right child must be a DataAVLTree
+				int rBalanceFactor =
+					((DataAVLTree) this.rightChild).leftChild.height() -
+					((DataAVLTree) this.rightChild).rightChild.height();
+				if(rBalanceFactor == -1){
+					// right-right   single left rotation around P
+					return this.rotateLeft();
+				}
+				else if(rBalanceFactor == 1){
+					// right-left    right rotation around R, then left rotation around P
+					return new DataAVLTree(this.elem,
+							this.leftChild,
+							this.rightChild.rotateRight()).rotateLeft();
+				}
+				else if(rBalanceFactor == 0){
+					// left rotation around P
+					return this.rotateLeft();
+				}
+			}
+			else if(pBalanceFactor == 2){
+				// if left tree is 2 nodes higher than right,
+				// the left child must be a DataAVLTree
+				int lBalanceFactor = 
+						((DataAVLTree) this.leftChild).leftChild.height() -
+						((DataAVLTree) this.leftChild).rightChild.height();
+				if(lBalanceFactor == 1){
+					// left-left    single right rotation around P
+					return this.rotateRight();
+				}
+				else if(lBalanceFactor == -1){
+					// left-right    left rotation around L, then right rotation around P
+					return new DataAVLTree(this.elem,
+							this.leftChild.rotateLeft(),
+							this.rightChild).rotateRight();
+				}
+				else if(lBalanceFactor == 0){
+					// right rotation around P
+					return this.rotateRight();
+				}
+			}
+			// if we get here there's something wrong, since every case should have been covered
+			throw new Error("Error when rebalancing: " + this.toString());
 		}
 	}
 	
 	public AVLTree rotateLeft() {
-		AVLTree root = this, pivot = this.rightChild;
-		return new DataAVLTree(pivot.getElem(), 
-				new DataAVLTree(root.getElem(),
-						root.getLeftChild(),
-						pivot.getLeftChild()),
-				pivot.getRightChild());
+		// only calling the rotateLeft method when
+		// the height from the root is at least 2,
+		// thus pivot is guaranteed to also be a DataAVLTree
+		DataAVLTree root = this, pivot = (DataAVLTree) this.rightChild;
+		return new DataAVLTree(pivot.elem, 
+				new DataAVLTree(root.elem,
+						root.leftChild,
+						pivot.leftChild),
+				pivot.rightChild);
 	}
 	
 	public AVLTree rotateRight() {
-		AVLTree root = this, pivot = this.leftChild;
-		return new DataAVLTree(pivot.getElem(),
-				pivot.getLeftChild(),
-				new DataAVLTree(root.getElem(),
-						pivot.getRightChild(),
-						root.getRightChild()));
+		// only calling the rotateRight method when
+		// the height from the root is at least 2,
+		// thus pivot is guaranteed to also be a DataAVLTree
+		DataAVLTree root = this, pivot = (DataAVLTree) this.leftChild;
+		return new DataAVLTree(pivot.elem,
+				pivot.leftChild,
+				new DataAVLTree(root.elem,
+						pivot.rightChild,
+						root.rightChild));
 	}
 	
 	public int height() {
@@ -158,27 +206,4 @@ public class DataAVLTree implements AVLTree {
 				leftChild.isBalanced() &&
 				rightChild.isBalanced();
 	}
-
-	public AVLTree getLeftChild() {
-		return this.leftChild;
-	}
-
-	public AVLTree setLeftChild(AVLTree left) {
-		this.leftChild = left;
-		return this;
-	}
-
-	public AVLTree getRightChild() {
-		return this.rightChild;
-	}
-
-	public AVLTree setRightChild(AVLTree right) {
-		this.rightChild = right;
-		return this;
-	}
-	
-	public int getElem(){
-		return this.elem;
-	}
-	
 }

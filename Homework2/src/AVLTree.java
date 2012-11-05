@@ -20,7 +20,7 @@ public interface AVLTree {
 	int largestElem(int parentValue);
 
 	boolean hasElem(int elem);
-
+	
 	boolean isBalanced();
 	
 	AVLTree rebalance();
@@ -28,10 +28,4 @@ public interface AVLTree {
 	AVLTree rotateLeft();
 	
 	AVLTree rotateRight();
-	
-	AVLTree getLeftChild();
-	AVLTree setLeftChild(AVLTree newLeft);
-	AVLTree getRightChild();
-	AVLTree setRightChild(AVLTree newRight);
-	
 }

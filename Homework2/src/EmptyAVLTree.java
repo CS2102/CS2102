@@ -8,13 +8,14 @@ public class EmptyAVLTree implements AVLTree {
 	
 	// largestElem not well-defined on empty BSTs, so raises an error
 	public int largestElem () {
-	  throw new RuntimeException("shouldn't call largestelem on MtBST") ;
+	  throw new RuntimeException("shouldn't call largestElem on MtBST") ;
 	}
 	  
 	public int largestElem(int parentValue){
 		return parentValue;
 	}
-	  
+	
+	// smallestElem not well-defined on empty BSTs, so raises an error
 	public int smallestElem () {
 		throw new RuntimeException("shouldn't call smallestElem on MtBST") ;
 	}
@@ -22,15 +23,13 @@ public class EmptyAVLTree implements AVLTree {
 	public int smallestElem(int parentValue){
 		return parentValue;
 	}
-	// --------------------------------------------------------
-	
+
 	public AVLTree addElem(int elem) {
 		return new DataAVLTree(elem);
 	}
 
 	public AVLTree remElem(int elem) {
-		// can't remove an element from an empty tree,
-		// so return an empty tree
+		// can't remove an element from an empty tree, just return the same tree
 		return this;
 	}
 	
@@ -39,12 +38,13 @@ public class EmptyAVLTree implements AVLTree {
 	  return rightsibling;
 	}
 	  
-	  // "this" is the right sibling; leftsibling is a DataBST
+	// returns the other sibling to remove parent of an empty sibling
 	public AVLTree mergeToRemoveParent(AVLTree leftsibling) {
 	  return leftsibling;
 	}
 
 	public boolean hasElem(int elem) {
+		// an empty tree has no elements
 		return false;
 	}
 
@@ -52,6 +52,7 @@ public class EmptyAVLTree implements AVLTree {
 		return 0;
 	}
 	
+	// always balanced
 	public boolean isBalanced() {
 		return true;
 	}
@@ -66,21 +67,5 @@ public class EmptyAVLTree implements AVLTree {
 	
 	public AVLTree rotateRight() {
 		return this;
-	}
-
-	public AVLTree getLeftChild() {
-		throw new RuntimeException("ERROR CODE 40493: This error should never be called.");
-	}
-
-	public AVLTree setLeftChild(AVLTree newLeft) {
-		throw new RuntimeException("ERROR CODE 40493: This error should never be called.");
-	}
-
-	public AVLTree getRightChild() {
-		throw new RuntimeException("ERROR CODE 40493: This error should never be called.");
-	}
-
-	public AVLTree setRightChild(AVLTree newRight) {
-		throw new RuntimeException("ERROR CODE 40493: This error should never be called.");
 	}
 }

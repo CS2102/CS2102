@@ -1,10 +1,25 @@
 import tester.*;
 
-class Examples {
+public class Examples {
 	
 	Queue Q = new QueueImplX();
 	Stack S = new StackImplX();
 	PriorityQueue P = new PriorityQueueImplX();
+	
+	AVLTree A = new EmptyAVLTree();
+	
+	
+	boolean testAVL(Tester t){
+		return t.checkExpect(A.addElem(4).addElem(6).addElem(3).addElem(5).hasElem(4),
+				true);
+	}
+	
+	boolean testAVLx(Tester t){
+		// more tests...
+		return true;
+	}
+	
+	// --------------------------------------------------------------------------------------------
 	
 	boolean testQueue(Tester t) {
 		return t.checkExpect(Q.newQ().enqueue(3).dequeue(),
@@ -25,7 +40,7 @@ class Examples {
 		return t.checkExpect(Q.newQ().enqueue(4).enqueue(5).dequeue(),
 				Q.newQ().enqueue(5));
 	}
-	
+
 // ------------------------------------------------------------------------------------------------
 	
 	boolean testStack(Tester t) {
@@ -52,6 +67,7 @@ class Examples {
 	}
 	
 // ------------------------------------------------------------------------------------------------
+	
 	boolean testPQ(Tester t) {
 		return t.checkExpect(P.newPQ().addElt(5).remMinElt(), P.newPQ());
 	}
