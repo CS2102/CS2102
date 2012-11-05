@@ -2,9 +2,9 @@ import tester.*;
 
 class Examples {
 	
-	Queue Q;
-	Stack S;
-	PriorityQueue P;
+	Queue Q = new QueueImplX();
+	Stack S = new StackImplX();
+	PriorityQueue P = new PriorityQueueImplX();
 	
 	boolean testQueue(Tester t) {
 		return t.checkExpect(Q.newQ().enqueue(3).dequeue(),
@@ -72,6 +72,6 @@ class Examples {
 
 	boolean testPQ5(Tester t) {
 		return t.checkExpect(P.newPQ().addElt(7).addElt(4).addElt(5).remMinElt().getMinElt(),
-				4);
+				5);
 	}
 }
