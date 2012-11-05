@@ -55,7 +55,6 @@ public class DataAVLTree implements AVLTree {
 	}
 
 	// returns set containing all existing elements except the given element
-	// TODO: call rebalance after each remElem call.
 	public AVLTree remElem (int elem) {
 	 if (elem == this.elem) {
 	     // four cases to consider.
@@ -69,12 +68,12 @@ public class DataAVLTree implements AVLTree {
 	     // child is BST try once more to see if easy case with Mt as right
 	     // sibling (mergeToRemoveParent) in which case return left child.
 	     // Fourth and final case is handled by BST mergeToRemoveParent     
-	     return this.leftChild.remParent(this.rightChild);
+	     return this.leftChild.remParent(this.rightChild).rebalance();
 	 }
 	 else if (elem < this.elem)
-	     return new DataAVLTree(this.elem, this.leftChild.remElem(elem), this.rightChild);
+	     return new DataAVLTree(this.elem, this.leftChild.remElem(elem), this.rightChild).rebalance();
 	 else // (elem > this.data)
-	    return new DataAVLTree(this.elem, this.leftChild, this.rightChild.remElem(elem));
+	    return new DataAVLTree(this.elem, this.leftChild, this.rightChild.remElem(elem)).rebalance();
 	 }
 	  
 	  // returns the other sibling to remove parent of an empty sibling
@@ -115,7 +114,7 @@ public class DataAVLTree implements AVLTree {
 		      return this.rightChild.hasElem(elem);
 	}
 	
-	private AVLTree rebalance(){
+	public AVLTree rebalance(){
 		if(this.isBalanced())
 			return this;
 		else {

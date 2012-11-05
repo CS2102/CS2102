@@ -52,8 +52,12 @@ public class EmptyAVLTree implements AVLTree {
 		return 0;
 	}
 	
-	public boolean isBalanced(){
+	public boolean isBalanced() {
 		return true;
+	}
+	
+	public AVLTree rebalance() {
+		return this;
 	}
 
 }
