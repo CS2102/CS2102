@@ -68,7 +68,7 @@ public class DataAVLTree implements AVLTree {
 	     // then we can immediately return right sibling. If, however, left
 	     // child is BST try once more to see if easy case with Mt as right
 	     // sibling (mergeToRemoveParent) in which case return left child.
-	     // Fourth and final case is handled by BST mergeToRemoveParent      
+	     // Fourth and final case is handled by BST mergeToRemoveParent     
 	     return this.leftChild.remParent(this.rightChild);
 	 }
 	 else if (elem < this.elem)
@@ -82,7 +82,7 @@ public class DataAVLTree implements AVLTree {
 		return rightSibling.mergeToRemoveParent(this);
 	}
 
-	// returns DataBST resulting from removing parent when both children are DataBSTS
+	// returns DataBST resulting from removing parent when both children are DataAVLTrees
 	public AVLTree mergeToRemoveParent(AVLTree leftSibling) {
 		// "this" refers to the original right sibling of the parent being deleted
 		// here, could decide whether to use largest-in-left or smallest-in-right
