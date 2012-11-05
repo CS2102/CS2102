@@ -5,7 +5,25 @@ public class EmptyAVLTree implements AVLTree {
 		// size of an empty tree
 		return 0;
 	}
-
+	
+	// largestElem not well-defined on empty BSTs, so raises an error
+	public int largestElem () {
+	  throw new RuntimeException("shouldn't call largestelem on MtBST") ;
+	}
+	  
+	public int largestElem(int parentValue){
+		return parentValue;
+	}
+	  
+	public int smallestElem () {
+		throw new RuntimeException("shouldn't call smallestElem on MtBST") ;
+	}
+		  
+	public int smallestElem(int parentValue){
+		return parentValue;
+	}
+	// --------------------------------------------------------
+	
 	public AVLTree addElem(int elem) {
 		return new DataAVLTree(elem);
 	}
@@ -14,6 +32,16 @@ public class EmptyAVLTree implements AVLTree {
 		// can't remove an element from an empty tree,
 		// so return an empty tree
 		return this;
+	}
+	
+	// returns the other sibling to remove parent of an empty sibling
+	public AVLTree remParent(AVLTree rightsibling) {
+	  return rightsibling;
+	}
+	  
+	  // "this" is the right sibling; leftsibling is a DataBST
+	public AVLTree mergeToRemoveParent(AVLTree leftsibling) {
+	  return leftsibling;
 	}
 
 	public boolean hasElem(int elem) {
@@ -26,22 +54,6 @@ public class EmptyAVLTree implements AVLTree {
 	
 	public boolean isBalanced(){
 		return true;
-	}
-
-	public int largestElem() {
-		return 0;
-	}
-
-	public int largestElem(int parentValue) {
-		return parentValue;
-	}
-
-	public int smallestElem() {
-		return 0;
-	}
-
-	public int smallestElem(int parentValue) {
-		return parentValue;
 	}
 
 }

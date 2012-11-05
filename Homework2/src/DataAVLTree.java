@@ -23,23 +23,96 @@ public class DataAVLTree implements AVLTree {
 		return this.leftChild.size() + this.rightChild.size() + 1;
 	}
 	
+	// produces the largest element in the BST
+	public int largestElem() {
+	  return this.rightChild.largestElem(this.elem);
+	}
+	  
+	public int largestElem(int parentValue){
+		return this.rightChild.largestElem(this.elem);
+	}
+	  
+	public int smallestElem() {
+		return this.leftChild.smallestElem(this.elem);
+	}
+		  
+	public int smallestElem(int parentValue){
+		return this.leftChild.smallestElem(this.elem);
+	}
+	// ------------------------------------------------
 	
 	public AVLTree addElem(int elem) {
-		// TODO: implement add code
-		rebalance();
-		return this;
+		if (elem == this.elem)
+		      return this.rebalance(); // not storing duplicate values
+		    else if (elem < this.elem)
+		      return new DataAVLTree (this.elem,
+		                          this.leftChild.addElem(elem),
+		                          this.rightChild).rebalance();
+		    else // elem > this.data
+		      return new DataAVLTree (this.elem,
+		                          this.leftChild,
+		                          this.rightChild.addElem(elem)).rebalance();
 	}
 
-	public AVLTree remElem(int elem) {
-		// TODO: implement remove code
-		rebalance();
-		return this;
+	// returns set containing all existing elements except the given element
+	// TODO: call rebalance after each remElem call.
+	public AVLTree remElem (int elem) {
+	 if (elem == this.elem) {
+	     // four cases to consider.
+         //
+	     //       elem        elem       elem       elem
+         //      /   \        /  \      /    \      /  \
+	     //     Mt   BST     Mt  Mt    BST   Mt    BST BST
+	     //
+	     // Elegant solution is to break into two steps. If left child is Mt
+	     // then we can immediately return right sibling. If, however, left
+	     // child is BST try once more to see if easy case with Mt as right
+	     // sibling (mergeToRemoveParent) in which case return left child.
+	     // Fourth and final case is handled by BST mergeToRemoveParent      
+	     return this.leftChild.remParent(this.rightChild);
+	 }
+	 else if (elem < this.elem)
+	     return new DataAVLTree(this.elem, this.leftChild.remElem(elem), this.rightChild);
+	 else // (elem > this.data)
+	    return new DataAVLTree(this.elem, this.leftChild, this.rightChild.remElem(elem));
+	 }
+	  
+	  // returns the other sibling to remove parent of an empty sibling
+	public AVLTree remParent(AVLTree rightSibling) {
+		return rightSibling.mergeToRemoveParent(this);
 	}
+
+	// returns DataBST resulting from removing parent when both children are DataBSTS
+	public AVLTree mergeToRemoveParent(AVLTree leftSibling) {
+		// "this" refers to the original right sibling of the parent being deleted
+		// here, could decide whether to use largest-in-left or smallest-in-right
+		// and branch accordingly.  
+		java.util.Random rand = new java.util.Random();
+		boolean leftSide = rand.nextBoolean();
+		if(leftSide){
+			// use largest-in-left
+			int newRoot = leftSibling.largestElem();
+			return new DataAVLTree(newRoot,
+					leftSibling.remElem(newRoot),
+					this);
+		}
+		else {
+			// use smallest-in-right
+			int newRoot = this.smallestElem();
+			return new DataAVLTree(newRoot,
+					leftSibling,
+					this.remElem(newRoot));
+		}
+	}
+	
 
 	public boolean hasElem(int elem) {
-		return (this.elem == elem ||
-				this.leftChild.hasElem(elem) ||
-				this.rightChild.hasElem(elem));
+		if (elem == this.elem) 
+		      return true; 
+		    else if (elem < this.elem)
+		      return this.leftChild.hasElem(elem);
+		    else // elem > this.data
+		      return this.rightChild.hasElem(elem);
 	}
 	
 	private AVLTree rebalance(){
@@ -67,22 +140,6 @@ public class DataAVLTree implements AVLTree {
 		return currBalanced &&
 				leftChild.isBalanced() &&
 				rightChild.isBalanced();
-	}
-
-	public int largestElem() {
-		return this.rightChild.largestElem(this.elem);
-	}
-
-	public int largestElem(int parentValue) {
-		return this.rightChild.largestElem(this.elem);
-	}
-
-	public int smallestElem() {
-		return this.leftChild.smallestElem(this.elem);
-	}
-
-	public int smallestElem(int parentValue) {
-		return this.leftChild.smallestElem(this.elem);
 	}
 	
 }
