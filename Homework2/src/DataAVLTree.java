@@ -114,7 +114,7 @@ public class DataAVLTree implements AVLTree {
 		      return this.rightChild.hasElem(elem);
 	}
 	
-	public AVLTree rebalance(){
+	public AVLTree rebalance() {
 		if(this.isBalanced())
 			return this;
 		else {
@@ -129,7 +129,17 @@ public class DataAVLTree implements AVLTree {
 		}
 	}
 	
-	public int height(){
+	public AVLTree rotateLeft() {
+		AVLTree root = this, pivot = this.rightChild;
+		
+		return this;
+	}
+
+	public AVLTree rotateRight() {
+		return this;
+	}
+	
+	public int height() {
 		return (leftChild.height() > rightChild.height() ?
 				leftChild.height() : rightChild.height()) + 1;
 	}

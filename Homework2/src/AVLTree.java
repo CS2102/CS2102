@@ -24,4 +24,9 @@ public interface AVLTree {
 	boolean isBalanced();
 	
 	AVLTree rebalance();
+	
+	AVLTree rotateLeft();
+	
+	AVLTree rotateRight();
+	
 }

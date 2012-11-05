@@ -59,5 +59,12 @@ public class EmptyAVLTree implements AVLTree {
 	public AVLTree rebalance() {
 		return this;
 	}
-
+	
+	public AVLTree rotateLeft() {
+		return this;
+	}
+	
+	public AVLTree rotateRight() {
+		return this;
+	}
 }
