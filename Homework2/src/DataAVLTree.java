@@ -132,7 +132,7 @@ public class DataAVLTree implements AVLTree {
 	public AVLTree rotateLeft() {
 		AVLTree root = this, pivot = this.rightChild;
 		/*
-		 * Pivot = Root.rightChild
+		 * x Pivot = Root.rightChild
 		 * Root.rightChild = Pivot.leftChild
 		 * Pivot.leftChild = Root
 		 * Root = Pivot
@@ -154,6 +154,24 @@ public class DataAVLTree implements AVLTree {
 		return currBalanced &&
 				leftChild.isBalanced() &&
 				rightChild.isBalanced();
+	}
+
+	public AVLTree getLeftChild() {
+		return this.leftChild;
+	}
+
+	public AVLTree setLeftChild(AVLTree left) {
+		this.leftChild = left;
+		return this;
+	}
+
+	public AVLTree getRightChild() {
+		return this.rightChild;
+	}
+
+	public AVLTree setRightChild(AVLTree right) {
+		this.rightChild = right;
+		return this;
 	}
 	
 }

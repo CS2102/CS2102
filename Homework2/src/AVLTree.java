@@ -29,4 +29,9 @@ public interface AVLTree {
 	
 	AVLTree rotateRight();
 	
+	AVLTree getLeftChild();
+	AVLTree setLeftChild(AVLTree newLeft);
+	AVLTree getRightChild();
+	AVLTree setRightChild(AVLTree newRight);
+	
 }

@@ -67,4 +67,20 @@ public class EmptyAVLTree implements AVLTree {
 	public AVLTree rotateRight() {
 		return this;
 	}
+
+	public AVLTree getLeftChild() {
+		throw new RuntimeException("ERROR CODE 40493: This error should never be called.");
+	}
+
+	public AVLTree setLeftChild(AVLTree newLeft) {
+		throw new RuntimeException("ERROR CODE 40493: This error should never be called.");
+	}
+
+	public AVLTree getRightChild() {
+		throw new RuntimeException("ERROR CODE 40493: This error should never be called.");
+	}
+
+	public AVLTree setRightChild(AVLTree newRight) {
+		throw new RuntimeException("ERROR CODE 40493: This error should never be called.");
+	}
 }
