@@ -131,17 +131,20 @@ public class DataAVLTree implements AVLTree {
 	
 	public AVLTree rotateLeft() {
 		AVLTree root = this, pivot = this.rightChild;
-		/*
-		 * x Pivot = Root.rightChild
-		 * Root.rightChild = Pivot.leftChild
-		 * Pivot.leftChild = Root
-		 * Root = Pivot
-		 */
-		return this;
+		return new DataAVLTree(pivot.getElem(), 
+				new DataAVLTree(root.getElem(),
+						root.getLeftChild(),
+						pivot.getLeftChild()),
+				pivot.getRightChild());
 	}
-
+	
 	public AVLTree rotateRight() {
-		return this;
+		AVLTree root = this, pivot = this.leftChild;
+		return new DataAVLTree(pivot.getElem(),
+				pivot.getLeftChild(),
+				new DataAVLTree(root.getElem(),
+						pivot.getRightChild(),
+						root.getRightChild()));
 	}
 	
 	public int height() {
@@ -172,6 +175,10 @@ public class DataAVLTree implements AVLTree {
 	public AVLTree setRightChild(AVLTree right) {
 		this.rightChild = right;
 		return this;
+	}
+	
+	public int getElem(){
+		return this.elem;
 	}
 	
 }
