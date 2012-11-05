@@ -131,7 +131,12 @@ public class DataAVLTree implements AVLTree {
 	
 	public AVLTree rotateLeft() {
 		AVLTree root = this, pivot = this.rightChild;
-		
+		/*
+		 * Pivot = Root.rightChild
+		 * Root.rightChild = Pivot.leftChild
+		 * Pivot.leftChild = Root
+		 * Root = Pivot
+		 */
 		return this;
 	}
 
