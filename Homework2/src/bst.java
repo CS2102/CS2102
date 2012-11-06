@@ -1,18 +1,13 @@
 
 //-------------------------------------------------------------------------
 
-interface IBST {
-  // returns set containing all existing elements and the given element
-  IBST addElem (int elem);
-  // returns set containing all existing elements except the given element
-  IBST remElem (int elem);
-  // returns the number of distinct elements in the set
-  int size ();
-  // determines whether given element is in the set
-  boolean hasElem (int elem);
+interface IBST extends ISet {
   // produces the largest element in the BST
   int largestElem();
   int largestElem(int parentValue);
+  // produces the smallest element in the BST
+  int smallestElem();
+  int smallestElem(int parentValue);
   // removes the parent of a left child
   IBST remParent(IBST sibling);
   // removes the parent of a right child
@@ -38,14 +33,23 @@ class MtBST implements IBST  {
   // determines whether the given element is in the set
   public boolean hasElem (int elem) { return false; }
 
-  // largestelem not well-defined on empty BSTs, so raises an error
+  // largestElem not well-defined on empty BSTs, so raises an error
   public int largestElem () {
-    throw new RuntimeException("shouldn't call largestelem on MtBST") ;
+    throw new RuntimeException("shouldn't call largestElem on MtBST") ;
   }
   
   public int largestElem(int parentValue){
 	  return parentValue;
   }
+  
+  // smallestElem not well-defined on empty BSTs, so raises an error
+  public int smallestElem () {
+	  throw new RuntimeException("shouldn't call smallestElem on MtBST") ;
+  }
+	  
+  public int smallestElem(int parentValue){
+	  return parentValue;
+   }
   
   // returns the other sibling to remove parent of an empty sibling
   public IBST remParent(IBST rightsibling) {
@@ -82,12 +86,12 @@ class DataBST implements IBST {
       return this; // not storing duplicate values
     else if (elem < this.data)
       return new DataBST (this.data,
-                          this.left.addElem(elem),
+                          (IBST) this.left.addElem(elem),
                           this.right);
     else // elem > this.data
       return new DataBST (this.data,
                           this.left,
-                          this.right.addElem(elem));
+                          (IBST) this.right.addElem(elem));
   }
   
   // produces the largest element in the BST
@@ -97,6 +101,15 @@ class DataBST implements IBST {
   
   public int largestElem(int parentValue){
 	  return this.right.largestElem(this.data);
+  }
+  
+  // produces the smallest element in the BST
+  public int smallestElem() {
+	  return this.left.smallestElem(this.data);
+  }
+	  
+  public int smallestElem(int parentValue){
+	  return this.left.smallestElem(this.data);
   }
   
   // determines whether the given element is in the set
@@ -115,8 +128,8 @@ class DataBST implements IBST {
        // four cases to consider.
        //
        //       elem        elem       elem       elem
-       //      /   \      /  \      /  \      /  \
-       //     Mt   BST   Mt  Mt   BST   Mt   BST BST
+       //      /   \        /  \      /    \      /  \
+       //     Mt   BST     Mt  Mt    BST   Mt    BST BST
        //
        // Elegant solution is to break into two steps. If left child is Mt
        // then we can immediately return right sibling. If, however, left
@@ -126,9 +139,13 @@ class DataBST implements IBST {
        return this.left.remParent(this.right);
    }
    else if (elem < this.data)
-       return new DataBST(this.data, this.left.remElem(elem), this.right);
+       return new DataBST(this.data, 
+    		   (IBST) this.left.remElem(elem), 
+    		   this.right);
    else // (elem > this.data)
-      return new DataBST(this.data, this.left, this.right.remElem(elem)) ;
+      return new DataBST(this.data, 
+    		  this.left, 
+    		  (IBST) this.right.remElem(elem));
   }
   
   // returns the other sibling to remove parent of an empty sibling
@@ -140,54 +157,22 @@ class DataBST implements IBST {
   public IBST mergeToRemoveParent(IBST leftSibling) {
     // "this" refers to the original right sibling of the parent being deleted
     // here, could decide whether to use largest-in-left or smallest-in-right
-    //   and branch accordingly.  Only showing largest-in-left code for now
-    int newRoot = leftSibling.largestElem();
-    return new DataBST(newRoot,
-                       leftSibling.remElem(newRoot),
-                       this); 
+    // and branch accordingly.  
+	java.util.Random rand = new java.util.Random();
+	boolean leftSide = rand.nextBoolean();
+	if(leftSide){
+		// use largest-in-left
+	int newRoot = leftSibling.largestElem();
+    	return new DataBST(newRoot,
+                       (IBST) leftSibling.remElem(newRoot),
+                       this);
+	}
+	else {
+		// use smallest-in-right
+		int newRoot = this.smallestElem();
+	    return new DataBST(newRoot,
+	    				leftSibling,
+	                    this.remElem(newRoot));
+	}
   }
 }
-
-//-------------------------------------------------------------------------
-/*
-class Examples {
-  Examples(){}
-  
-  IBST b1 = new DataBST (5, new MtBST(), new MtBST());
-  IBST b2 = b1.addElem(3).addElem(4).addElem(8).addElem(7);
-  IBST b2no4 = b1.addElem(3).addElem(8).addElem(7);
-  IBST b2no8 = b1.addElem(3).addElem(4).addElem(7);
-  IBST b2rem5 = new DataBST(4, new MtBST(), new MtBST()).addElem(3).addElem(8).addElem(7);
-
-  // does size work as expected?
-  boolean test1 (Tester t) {
-    return t.checkExpect(b2.size(), 5);
-  }
-  
-  // do size and addElem interact properly on a new element?
-  boolean test2 (Tester t) {
-    return t.checkExpect(b1.addElem(7).size(), 2);
-  }
-    
-  // do size and addElem interact properly on a duplicate element?
-  boolean test3 (Tester t) {
-    return t.checkExpect(b1.addElem(5).size(), 1);
-  }
-  
-  // check removal in left subtree
-  boolean test4 (Tester t) {
-    return t.checkExpect(b2.remElem(4), b2no4);
-  }
-  
-  // check removal in right subtree
-  boolean test5 (Tester t) {
-    return t.checkExpect(b2.remElem(8), b2no8);
-  }
-
-  // check removal of root
-  boolean test6 (Tester t) {
-    return t.checkExpect(b2.remElem(5), b2rem5);
-  }
-
-}
- */ 

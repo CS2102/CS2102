@@ -41,15 +41,15 @@ public class DataAVLTree implements AVLTree {
 
 	public AVLTree addElem(int elem) {
 		if (elem == this.elem)
-		      return this.rebalance(); // not storing duplicate values
-		    else if (elem < this.elem)
-		      return new DataAVLTree (this.elem,
-		                          this.leftChild.addElem(elem),
-		                          this.rightChild).rebalance();
-		    else // elem > this.data
-		      return new DataAVLTree (this.elem,
-		                          this.leftChild,
-		                          this.rightChild.addElem(elem)).rebalance();
+			return this.rebalance(); // not storing duplicate values
+		else if (elem < this.elem)
+			return new DataAVLTree (this.elem,
+					(AVLTree) this.leftChild.addElem(elem),
+					this.rightChild).rebalance();
+		else // elem > this.data
+			return new DataAVLTree (this.elem,
+					this.leftChild,
+					(AVLTree) this.rightChild.addElem(elem)).rebalance();
 	}
 
 	// returns set containing all existing elements except the given element
@@ -67,21 +67,25 @@ public class DataAVLTree implements AVLTree {
 	     // child is BST try once more to see if easy case with Mt as right
 	     // sibling (mergeToRemoveParent) in which case return left child.
 	     // Fourth and final case is handled by BST mergeToRemoveParent     
-	     return this.leftChild.remParent(this.rightChild).rebalance();
+	     return ((AVLTree) this.leftChild.remParent(this.rightChild)).rebalance();
 	 }
 	 else if (elem < this.elem)
-	     return new DataAVLTree(this.elem, this.leftChild.remElem(elem), this.rightChild).rebalance();
+	     return new DataAVLTree(this.elem, 
+	    		 (AVLTree) this.leftChild.remElem(elem), 
+	    		 this.rightChild).rebalance();
 	 else // (elem > this.data)
-	    return new DataAVLTree(this.elem, this.leftChild, this.rightChild.remElem(elem)).rebalance();
+	    return new DataAVLTree(this.elem, 
+	    		this.leftChild, 
+	    		(AVLTree) this.rightChild.remElem(elem)).rebalance();
 	 }
 	  
 	  // returns the other sibling to remove parent of an empty sibling
-	public AVLTree remParent(AVLTree rightSibling) {
-		return rightSibling.mergeToRemoveParent(this);
+	public AVLTree remParent(IBST rightSibling) {
+		return (AVLTree) rightSibling.mergeToRemoveParent(this);
 	}
 
 	// returns DataAVLTree resulting from removing parent when both children are DataAVLTrees
-	public AVLTree mergeToRemoveParent(AVLTree leftSibling) {
+	public AVLTree mergeToRemoveParent(IBST leftSibling) {
 		// "this" refers to the original right sibling of the parent being deleted
 		// here, randomly decide whether to use largest-in-left or smallest-in-right  
 		java.util.Random rand = new java.util.Random();
@@ -90,14 +94,14 @@ public class DataAVLTree implements AVLTree {
 			// use largest-in-left
 			int newRoot = leftSibling.largestElem();
 			return new DataAVLTree(newRoot,
-					leftSibling.remElem(newRoot),
+					(AVLTree) leftSibling.remElem(newRoot),
 					this);
 		}
 		else {
 			// use smallest-in-right
 			int newRoot = this.smallestElem();
 			return new DataAVLTree(newRoot,
-					leftSibling,
+					(AVLTree) leftSibling,
 					this.remElem(newRoot));
 		}
 	}

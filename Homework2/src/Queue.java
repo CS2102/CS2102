@@ -1,8 +1,6 @@
 
 public interface Queue {
 	
-	Queue newQ();  // produces a Queue with no elements
-	
 	Queue enqueue(int elem);  // adds element
 	
 	Queue dequeue();  // remove least recently-added element

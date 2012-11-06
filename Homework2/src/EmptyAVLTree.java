@@ -34,13 +34,13 @@ public class EmptyAVLTree implements AVLTree {
 	}
 	
 	// returns the other sibling to remove parent of an empty sibling
-	public AVLTree remParent(AVLTree rightsibling) {
-	  return rightsibling;
+	public AVLTree remParent(IBST rightsibling) {
+	  return (AVLTree) rightsibling;
 	}
 	  
 	// returns the other sibling to remove parent of an empty sibling
-	public AVLTree mergeToRemoveParent(AVLTree leftsibling) {
-	  return leftsibling;
+	public AVLTree mergeToRemoveParent(IBST leftsibling) {
+	  return (AVLTree) leftsibling;
 	}
 
 	public boolean hasElem(int elem) {

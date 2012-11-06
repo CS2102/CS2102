@@ -1,8 +1,6 @@
 
 public interface Stack {
 	
-	Stack newStk();  // produces a Stack with no elements
-	
 	Stack push(int elem);  // adds element
 	
 	Stack pop();  // remove most recently-added element

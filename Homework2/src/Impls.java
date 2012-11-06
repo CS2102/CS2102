@@ -5,9 +5,8 @@ import java.util.*;
 class QueueImplX implements Queue {
 	java.util.LinkedList<Integer> q = new LinkedList<Integer>();
 	
-	public QueueImplX newQ(){
+	public QueueImplX(){
 		q = new LinkedList<Integer>();
-		return this;
 	}
 	
 	public QueueImplX enqueue(int elem){
@@ -28,9 +27,8 @@ class QueueImplX implements Queue {
 class StackImplX implements Stack {
 	java.util.LinkedList<Integer> s = new LinkedList<Integer>();
 	
-	public StackImplX newStk(){
+	public StackImplX(){
 		s = new LinkedList<Integer>();
-		return this;
 	}
 	
 	public StackImplX push(int elem){
@@ -51,9 +49,8 @@ class StackImplX implements Stack {
 class PriorityQueueImplX implements PriorityQueue {
 	java.util.PriorityQueue<Integer> p = new java.util.PriorityQueue<Integer>();
 	
-	public PriorityQueueImplX newPQ(){
+	public PriorityQueueImplX(){
 		p = new java.util.PriorityQueue<Integer>();
-		return this;
 	}
 	
 	public PriorityQueueImplX addElt(int elem){

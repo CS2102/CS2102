@@ -1,25 +1,7 @@
 
-public interface AVLTree {
-
-	int size();
-
+public interface AVLTree extends IBST {
+	
 	int height();
-
-	AVLTree addElem(int elem);
-
-	AVLTree remElem(int elem);
-	
-	AVLTree remParent(AVLTree sibling);
-	
-	AVLTree mergeToRemoveParent(AVLTree sibling);
-	
-	int smallestElem();
-	int smallestElem(int parentValue);
-	
-	int largestElem();
-	int largestElem(int parentValue);
-
-	boolean hasElem(int elem);
 	
 	boolean isBalanced();
 	
