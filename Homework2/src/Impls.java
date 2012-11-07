@@ -2,19 +2,19 @@ import java.util.*;
 
 // Some ADT implementations from the Java libraries, for convenience in testing
 
-class QueueImplX implements Queue {
+class Queue implements IQueue {
 	java.util.LinkedList<Integer> q = new LinkedList<Integer>();
 	
-	public QueueImplX(){
+	public Queue(){
 		q = new LinkedList<Integer>();
 	}
 	
-	public QueueImplX enqueue(int elem){
+	public Queue enqueue(int elem){
 		q.add(new Integer(elem));
 		return this;
 	}
 	
-	public QueueImplX dequeue(){
+	public Queue dequeue(){
 		q.removeFirst();
 		return this;
 	}
@@ -24,19 +24,19 @@ class QueueImplX implements Queue {
 	}	
 }
 
-class StackImplX implements Stack {
+class Stack implements IStack {
 	java.util.LinkedList<Integer> s = new LinkedList<Integer>();
 	
-	public StackImplX(){
+	public Stack(){
 		s = new LinkedList<Integer>();
 	}
 	
-	public StackImplX push(int elem){
+	public Stack push(int elem){
 		s.push(elem);
 		return this;
 	}
 	
-	public StackImplX pop(){
+	public Stack pop(){
 		s.pop();
 		return this;
 	}
@@ -46,19 +46,19 @@ class StackImplX implements Stack {
 	}
 }
 
-class PriorityQueueImplX implements PriorityQueue {
+class PriorityQueue implements IPriorityQueue {
 	java.util.PriorityQueue<Integer> p = new java.util.PriorityQueue<Integer>();
 	
-	public PriorityQueueImplX(){
+	public PriorityQueue(){
 		p = new java.util.PriorityQueue<Integer>();
 	}
 	
-	public PriorityQueueImplX addElt(int elem){
+	public PriorityQueue addElt(int elem){
 		p.offer(elem);
 		return this;
 	}
 	
-	public PriorityQueueImplX remMinElt(){
+	public PriorityQueue remMinElt(){
 		p.poll();
 		return this;
 	}

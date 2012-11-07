@@ -2,9 +2,9 @@ import tester.*;
 
 public class Examples {
 	
-	Queue Q = new QueueImplX();
-	Stack S = new StackImplX();
-	PriorityQueue P = new PriorityQueueImplX();
+	IQueue Q = new Queue();
+	IStack S = new Stack();
+	IPriorityQueue P = new PriorityQueue();
 	
 	AVLTree A = new EmptyAVLTree();
 	AVLTree B = new EmptyAVLTree();
@@ -79,73 +79,73 @@ public class Examples {
 	// --------------------------------------------------------------------------------------------
 	
 	boolean testQueue(Tester t) {
-		return t.checkExpect(new QueueImplX().enqueue(3).dequeue(),
-				new QueueImplX());
+		return t.checkExpect(new Queue().enqueue(3).dequeue(),
+				new Queue());
 	}
 	
 	boolean testQueue2(Tester t) {
-		return t.checkExpect(new QueueImplX().enqueue(7).enqueue(4).enqueue(5).dequeue(),
-				new QueueImplX().enqueue(4).enqueue(5));
+		return t.checkExpect(new Queue().enqueue(7).enqueue(4).enqueue(5).dequeue(),
+				new Queue().enqueue(4).enqueue(5));
 	}
 	
 	boolean testQueue3(Tester t) {
-		return t.checkExpect(new QueueImplX().enqueue(4).enqueue(5).front(),
+		return t.checkExpect(new Queue().enqueue(4).enqueue(5).front(),
 				4);
 	}
 	
 	boolean testQueue4(Tester t) {
-		return t.checkExpect(new QueueImplX().enqueue(4).enqueue(5).dequeue(),
-				new QueueImplX().enqueue(5));
+		return t.checkExpect(new Queue().enqueue(4).enqueue(5).dequeue(),
+				new Queue().enqueue(5));
 	}
 
 // ------------------------------------------------------------------------------------------------
 	
 	boolean testStack(Tester t) {
-		return t.checkExpect(new StackImplX().push(45).pop(),
-				new StackImplX());
+		return t.checkExpect(new Stack().push(45).pop(),
+				new Stack());
 	}
 	
 	boolean testStack2(Tester t) {
-		return t.checkExpect(new StackImplX().push(45).push(768).pop(),
-				new StackImplX().push(45));
+		return t.checkExpect(new Stack().push(45).push(768).pop(),
+				new Stack().push(45));
 	}
 
 	boolean testStack3(Tester t) {
-		return t.checkExpect(new StackImplX().push(7).push(4).push(5).pop(),
-				new StackImplX().push(7).push(4));
+		return t.checkExpect(new Stack().push(7).push(4).push(5).pop(),
+				new Stack().push(7).push(4));
 	}
 
 	boolean testStack4(Tester t) {
-		return t.checkExpect(new StackImplX().push(7).push(4).push(5).top(), 5);
+		return t.checkExpect(new Stack().push(7).push(4).push(5).top(), 5);
 	}
 
 	boolean testStack5(Tester t) {
-		return t.checkExpect(new StackImplX().push(7).push(4).push(5).pop().top(), 4);
+		return t.checkExpect(new Stack().push(7).push(4).push(5).pop().top(), 4);
 	}
 	
 // ------------------------------------------------------------------------------------------------
 	
 	boolean testPQ(Tester t) {
-		return t.checkExpect(new PriorityQueueImplX().addElt(5).remMinElt(), 
-				new PriorityQueueImplX());
+		return t.checkExpect(new PriorityQueue().addElt(5).remMinElt(), 
+				new PriorityQueue());
 	}
 	
 	boolean testPQ2(Tester t) {
-		return t.checkExpect(new PriorityQueueImplX().addElt(5).addElt(3).remMinElt(),
-				new PriorityQueueImplX().addElt(5));
+		return t.checkExpect(new PriorityQueue().addElt(5).addElt(3).remMinElt(),
+				new PriorityQueue().addElt(5));
 	}
 	
 	boolean testPQ3(Tester t) {
-		return t.checkExpect(new PriorityQueueImplX().addElt(5).addElt(3).getMinElt(), 3);
+		return t.checkExpect(new PriorityQueue().addElt(5).addElt(3).getMinElt(), 3);
 	}
 	
 	boolean testPQ4(Tester t) {
-		return t.checkExpect(new PriorityQueueImplX().addElt(7).addElt(4).addElt(5).remMinElt(),
-				new PriorityQueueImplX().addElt(7).addElt(5));
+		return t.checkExpect(new PriorityQueue().addElt(7).addElt(4).addElt(5).remMinElt(),
+				new PriorityQueue().addElt(7).addElt(5));
 	}
 
 	boolean testPQ5(Tester t) {
-		return t.checkExpect(new PriorityQueueImplX().addElt(7).addElt(4).addElt(5).remMinElt()
+		return t.checkExpect(new PriorityQueue().addElt(7).addElt(4).addElt(5).remMinElt()
 				.getMinElt(),  5);
 	}
 }
