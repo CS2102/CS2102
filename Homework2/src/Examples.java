@@ -7,6 +7,7 @@ public class Examples {
 	PriorityQueue P = new PriorityQueueImplX();
 	
 	AVLTree A = new EmptyAVLTree();
+	AVLTree B = new EmptyAVLTree();
 	
 	ISet set = new EmptyAVLTree();
 	
@@ -38,11 +39,43 @@ public class Examples {
 				.height(),  3);
 	}
 	
-	boolean testAVLx(Tester t){
-		// more tests...
-		return true;
+	
+	boolean testAVL5(Tester t){
+		A = new EmptyAVLTree();
+		return t.checkExpect(((AVLTree)A.addElem(5).addElem(6).addElem(7)).isBalanced(), true);
 	}
 	
+	boolean testAVL6(Tester t){
+		A = new EmptyAVLTree();
+		return t.checkExpect(((AVLTree)A.addElem(5).addElem(4).addElem(3)).largestElem(), 5);
+	}
+
+	boolean testAVL7(Tester t){
+		A = new EmptyAVLTree();
+		return t.checkExpect(((AVLTree)A.addElem(5).addElem(4).addElem(3)).smallestElem(), 3);
+	}
+
+	// Two cases depending on which side is made root (depending on a random object)
+	boolean testAVL8(Tester t){
+		A = new EmptyAVLTree();
+		B = new EmptyAVLTree();
+		return t.checkOneOf(((AVLTree)A.addElem(5).addElem(4).addElem(3)).remElem(4),
+				(AVLTree)B.addElem(5).addElem(3),
+				(AVLTree)B.addElem(3).addElem(5)
+		);
+	}
+
+	boolean testAVL9(Tester t){
+		A = new EmptyAVLTree();
+		return t.checkOneOf(((AVLTree)A.addElem(5).addElem(4).addElem(7).addElem(6)
+				.addElem(9).addElem(10)).isBalanced(), true);
+	}
+	
+	boolean testAVL10(Tester t){
+		A = new EmptyAVLTree();
+		return t.checkOneOf(((AVLTree)A.addElem(5).addElem(3).addElem(6).addElem(2)
+				.addElem(4).addElem(1)).isBalanced(), true);
+	}
 	// --------------------------------------------------------------------------------------------
 	
 	boolean testQueue(Tester t) {
