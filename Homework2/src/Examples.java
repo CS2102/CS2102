@@ -104,12 +104,14 @@ public class Examples {
 	}
 
 	boolean testAVL14(Tester t) {
-		DataBST D = new DataBST(4, (IBST)new MtBST().addElem(5).addElem(4).addElem(12), (IBST)new MtBST().addElem(3).addElem(6));
+		DataBST D = new DataBST(5, (IBST)new MtBST().addElem(3).addElem(5).addElem(2),
+				(IBST)new MtBST().addElem(6).addElem(7));
 		return t.checkExpect(isAVL(D), true);
 	}
 
 	boolean testAVL15(Tester t) {
-		DataBST D = new DataBST(4, (IBST)new MtBST().addElem(5).addElem(4).addElem(12), (IBST)new MtBST().addElem(3));
+		DataBST D = new DataBST(6, (IBST)new MtBST().addElem(5).addElem(4).addElem(2),
+				(IBST)new MtBST().addElem(9));
 		return t.checkExpect(isAVL(D), false);
 	}
 	
