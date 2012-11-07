@@ -5,6 +5,7 @@ public class Examples {
 	public boolean isAVL(IBST tree) {
 		if (tree.height() == 0) {return true;}
 		else {
+			DataBST dbst = (DataBST)tree;
 			boolean currBalanced = Math.abs(dbst.leftChild.height() - dbst.rightChild.height()) <= 1;
 			return currBalanced &&
 					isAVL(dbst) &&
