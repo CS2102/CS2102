@@ -2,6 +2,16 @@ import tester.*;
 
 public class Examples {
 	
+	public boolean isAVL(IBST tree) {
+		if (tree.height() == 0) {return true;}
+		else {
+			boolean currBalanced = Math.abs(dbst.leftChild.height() - dbst.rightChild.height()) <= 1;
+			return currBalanced &&
+					isAVL(dbst) &&
+					isAVL(dbst);
+		}
+	}
+	
 	IQueue Q = new Queue();
 	IStack S = new Stack();
 	IPriorityQueue P = new PriorityQueue();
@@ -39,7 +49,6 @@ public class Examples {
 				.height(),  3);
 	}
 	
-	
 	boolean testAVL5(Tester t){
 		A = new EmptyAVLTree();
 		return t.checkExpect(((AVLTree)A.addElem(5).addElem(6).addElem(7)).isBalanced(), true);
@@ -76,6 +85,13 @@ public class Examples {
 		return t.checkOneOf(((AVLTree)A.addElem(5).addElem(3).addElem(6).addElem(2)
 				.addElem(4).addElem(1)).isBalanced(), true);
 	}
+	
+	boolean testAVL11(Tester t){
+		A = new EmptyAVLTree();
+		return t.checkExpect(isAVL((AVLTree)A.addElem(1).addElem(2).addElem(3)
+				.addElem(4).addElem(5)), true);
+	}
+	
 	// --------------------------------------------------------------------------------------------
 	
 	boolean testQueue(Tester t) {

@@ -12,6 +12,7 @@ interface IBST extends ISet {
   IBST remParent(IBST sibling);
   // removes the parent of a right child
   IBST mergeToRemoveParent(IBST sibling);
+int height();
 }
   
 //-------------------------------------------------------------------------
@@ -19,8 +20,10 @@ interface IBST extends ISet {
 class MtBST implements IBST  {
   MtBST() {}
   
+  public int height() {return 0;}
+  
   // returns the number of distinct elements in the set
-  public int size () { return 0; }
+  public int size () {return 0;}
   
   // returns set containing all existing elements and the given element
   public IBST addElem (int elem) {
@@ -28,10 +31,10 @@ class MtBST implements IBST  {
   }
 
   // returns set containing all existing elements except the given element
-  public IBST remElem (int elem) { return this; }
+  public IBST remElem (int elem) {return this;}
 
   // determines whether the given element is in the set
-  public boolean hasElem (int elem) { return false; }
+  public boolean hasElem (int elem) {return false;}
 
   // largestElem not well-defined on empty BSTs, so raises an error
   public int largestElem () {
@@ -66,18 +69,24 @@ class MtBST implements IBST  {
 
 class DataBST implements IBST {
   int data;
-  IBST left;
-  IBST right;
+  IBST leftChild;
+  IBST rightChild;
   
   DataBST(int data, IBST left, IBST right) {
     this.data = data;
-    this.left = left;
-    this.right = right;
+    this.leftChild = left;
+    this.rightChild = right;
   }
+  
+  // returns height of tree
+  public int height() {
+		return (leftChild.height() > rightChild.height() ?
+				leftChild.height() : rightChild.height()) + 1;
+	}
   
   // returns the number of distinct elements in the set
   public int size() {
-    return 1 + this.left.size() + this.right.size();
+    return 1 + this.leftChild.size() + this.rightChild.size();
   }
   
   // returns set containing all existing elements and the given element
@@ -86,30 +95,30 @@ class DataBST implements IBST {
       return this; // not storing duplicate values
     else if (elem < this.data)
       return new DataBST (this.data,
-                          (IBST) this.left.addElem(elem),
-                          this.right);
+                          (IBST) this.leftChild.addElem(elem),
+                          this.rightChild);
     else // elem > this.data
       return new DataBST (this.data,
-                          this.left,
-                          (IBST) this.right.addElem(elem));
+                          this.leftChild,
+                          (IBST) this.rightChild.addElem(elem));
   }
   
   // produces the largest element in the BST
   public int largestElem() {
-    return this.right.largestElem(this.data);
+    return this.rightChild.largestElem(this.data);
   }
   
   public int largestElem(int parentValue){
-	  return this.right.largestElem(this.data);
+	  return this.rightChild.largestElem(this.data);
   }
   
   // produces the smallest element in the BST
   public int smallestElem() {
-	  return this.left.smallestElem(this.data);
+	  return this.leftChild.smallestElem(this.data);
   }
 	  
   public int smallestElem(int parentValue){
-	  return this.left.smallestElem(this.data);
+	  return this.leftChild.smallestElem(this.data);
   }
   
   // determines whether the given element is in the set
@@ -117,9 +126,9 @@ class DataBST implements IBST {
     if (elem == this.data) 
       return true; 
     else if (elem < this.data)
-      return this.left.hasElem(elem);
+      return this.leftChild.hasElem(elem);
     else // elem > this.data
-      return this.right.hasElem(elem);
+      return this.rightChild.hasElem(elem);
   }
   
   // returns set containing all existing elements except the given element
@@ -136,16 +145,16 @@ class DataBST implements IBST {
        // child is BST try once more to see if easy case with Mt as right
        // sibling (mergeToRemoveParent) in which case return left child.
        // Fourth and final case is handled by BST mergeToRemoveParent      
-       return this.left.remParent(this.right);
+       return this.leftChild.remParent(this.rightChild);
    }
    else if (elem < this.data)
        return new DataBST(this.data, 
-    		   (IBST) this.left.remElem(elem), 
-    		   this.right);
+    		   (IBST) this.leftChild.remElem(elem), 
+    		   this.rightChild);
    else // (elem > this.data)
       return new DataBST(this.data, 
-    		  this.left, 
-    		  (IBST) this.right.remElem(elem));
+    		  this.leftChild, 
+    		  (IBST) this.rightChild.remElem(elem));
   }
   
   // returns the other sibling to remove parent of an empty sibling
