@@ -1,8 +1,8 @@
 public class Report {
-	Reading[] readings;
-	Date date;
-	double high = Double.MIN_VALUE;
-	double low = Double.MAX_VALUE;
+	private Reading[] readings;
+	private Date date;
+	private double high = Double.MIN_VALUE;
+	private double low = Double.MAX_VALUE;
 	
 	Report(Date d, Reading ... readings) {
 		this.date = d;
@@ -10,8 +10,8 @@ public class Report {
 		this.high = this.calcHigh();
 		this.low = this.calcLow();
 	}
-	
-	double calcHigh() {
+
+	public double calcHigh() {
 		for (Reading reading : this.readings) {
 			if (reading.getTemp() > high) {
 				high = reading.getTemp();
@@ -20,7 +20,7 @@ public class Report {
 		return high;
 	}
 
-	double calcLow() {
+	public double calcLow() {
 		for (Reading reading : this.readings) {
 			if (reading.getTemp() < low) {
 				low = reading.getTemp();
@@ -29,15 +29,31 @@ public class Report {
 		return low;
 	}
 	
-	int getYear() {
-		return this.date.getYear();
-	}
-	
-	int getMonth() {
-		return this.date.getMonth();
+	/**
+	 * @return the readings
+	 */
+	public Reading[] getReadings() {
+		return readings;
 	}
 
-	int getDay() {
-		return this.date.getDay();
+	/**
+	 * @return the date
+	 */
+	public Date getDate() {
+		return date;
+	}
+
+	/**
+	 * @return the high
+	 */
+	public double getHigh() {
+		return high;
+	}
+
+	/**
+	 * @return the low
+	 */
+	public double getLow() {
+		return low;
 	}
 }

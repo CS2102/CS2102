@@ -1,8 +1,8 @@
 
 public class Reading {
-	double temp;
-	int hour;
-	int minute;
+	private double temp;
+	private int hour;
+	private int minute;
 	
 	/**
 	 * @param temp

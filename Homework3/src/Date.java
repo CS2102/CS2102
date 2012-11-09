@@ -1,8 +1,8 @@
 
 public class Date {
-	int year;
-	int month;
-	int day;
+	private int year;
+	private int month;
+	private int day;
 
 	/**
 	 * @param year
@@ -15,6 +15,14 @@ public class Date {
 		this.day = day;
 	}
 
+	/**
+	 * @return boolean
+	 * if dates are same
+	 */
+	public boolean equals(Date d) {
+		return this.year == d.year && this.month == d.month && this.day == d.day; 
+	}
+	 
 	/**
 	 * @return the year
 	 */
