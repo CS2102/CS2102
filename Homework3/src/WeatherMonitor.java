@@ -4,8 +4,8 @@ public class WeatherMonitor {
 	LinkedList<Report> reports;
 	WeatherMonitor () {}
 	
-	WeatherMonitor addReport(Report report) {
-		this.reports.add(report);
+	WeatherMonitor addReport(int year, int month, int day, Reading ... readings) {
+		this.reports.add(new Report(new Date(year, month, day), readings));
 		return this;
 	}
 	
@@ -14,7 +14,7 @@ public class WeatherMonitor {
 		int totalHigh = 0;
 		int totalDays = 0;
 		for (Report r : reports) {
-			if (r.month == month && r.year == year) {
+			if (r.getMonth() == month && r.getYear() == year) {
 				totalDays++;
 				totalHigh += r.high;
 			}
@@ -26,7 +26,7 @@ public class WeatherMonitor {
 		int totalLow = 0;
 		int totalDays = 0;
 		for (Report r : reports) {
-			if (r.month == month && r.year == year) {
+			if (r.getMonth() == month && r.getYear() == year) {
 				totalDays++;
 				totalLow += r.low;
 			}

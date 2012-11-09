@@ -1,36 +1,43 @@
-import java.util.LinkedList;
-
 public class Report {
-	LinkedList<Double> readings = new LinkedList<Double>();
-	int year;
-	int month;
-	int day;
-	double high = 0.0;
-	double low = 9999.99;
-	Report(int year, int month, int day, LinkedList<Double> readings) {
-		this.year = year;
-		this.month = month;
-		this.day = day;
+	Reading[] readings;
+	Date date;
+	double high = Double.MIN_VALUE;
+	double low = Double.MAX_VALUE;
+	
+	Report(Date d, Reading ... readings) {
+		this.date = d;
 		this.readings = readings;
 		this.high = this.calcHigh();
 		this.low = this.calcLow();
 	}
 	
 	double calcHigh() {
-		for (double reading : this.readings) {
-			if (reading > high) {
-				high = reading;
+		for (Reading reading : this.readings) {
+			if (reading.getTemp() > high) {
+				high = reading.getTemp();
 			}
 		}
 		return high;
 	}
 
 	double calcLow() {
-		for (double reading : this.readings) {
-			if (reading < low) {
-				low = reading;
+		for (Reading reading : this.readings) {
+			if (reading.getTemp() < low) {
+				low = reading.getTemp();
 			}
 		}
 		return low;
+	}
+	
+	int getYear() {
+		return this.date.getYear();
+	}
+	
+	int getMonth() {
+		return this.date.getMonth();
+	}
+
+	int getDay() {
+		return this.date.getDay();
 	}
 }
