@@ -1,11 +1,13 @@
+import java.util.LinkedList;
+
 public class Report {
-	double[] readings;
+	LinkedList<Double> readings = new LinkedList<Double>();
 	int year;
 	int month;
 	int day;
 	double high = 0.0;
 	double low = 9999.99;
-	Report(int year, int month, int day, double[] readings) {
+	Report(int year, int month, int day, LinkedList<Double> readings) {
 		this.year = year;
 		this.month = month;
 		this.day = day;
