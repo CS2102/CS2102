@@ -1,6 +1,7 @@
 public class Report {
 	private Reading[] readings;
 	private Date date;
+	// These are opposites to ensure they get overwritten
 	private double high = Double.MIN_VALUE;
 	private double low = Double.MAX_VALUE;
 	

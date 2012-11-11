@@ -26,8 +26,8 @@ public class WeatherMonitor {
 		throw new RuntimeException("Date not found");
 	}
 	
-	public double averageHigh(int month, int year) {
-		int totalHigh = 0;
+	public float averageHigh(int year, int month) {
+		float totalHigh = 0;
 		int totalDays = 0;
 		for (Report r : reports) {
 			if (r.getDate().getMonth() == month && r.getDate().getYear() == year) {
@@ -35,11 +35,16 @@ public class WeatherMonitor {
 				totalHigh += r.getHigh();
 			}
 		}
-		return (totalHigh / totalDays);
+		if (totalDays != 0) {
+			return totalHigh / totalDays;
+		}
+		else {
+			throw new RuntimeException("No data for given month");
+		}
 	}
 	
-	public double averageLow(int month, int year) {
-		int totalLow = 0;
+	public float averageLow(int year, int month) {
+		float totalLow = 0;
 		int totalDays = 0;
 		for (Report r : reports) {
 			if (r.getDate().getMonth() == month && r.getDate().getYear() == year) {
@@ -47,6 +52,11 @@ public class WeatherMonitor {
 				totalLow += r.getLow();
 			}
 		}
-		return (totalLow / totalDays);
+		if (totalDays != 0) {
+			return totalLow / totalDays;
+		}
+		else {
+			throw new RuntimeException("No data for given month");
+		}
 	}
 }
