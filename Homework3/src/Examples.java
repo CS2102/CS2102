@@ -32,11 +32,11 @@ public class Examples {
 	}
 
 	boolean test6(Tester t) {
-		return t.checkExpect(w.averageHigh(1987, 5), 62.5F);
+		return t.checkInexact(w.averageHigh(1987, 5), 62.5, .0001);
 	}
 
 	boolean test7(Tester t) {
-		return t.checkExpect(w.averageLow(1987, 5), 37.525F);
+		return t.checkInexact(w.averageLow(1987, 5), 37.525, .0001);
 	}
 		
 	boolean test8(Tester t) {
