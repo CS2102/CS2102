@@ -1,6 +1,0 @@
-1.  We provide a report class. Users may extend this class and still maintain
-	the default functions needed by the weather monitor. They could change the type
-	of the data held in the LinkedList, or extend the Report class. They also could
-	extend WeatherMonitor itself.
-
-2.  No. Yes.
