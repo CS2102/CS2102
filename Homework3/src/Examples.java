@@ -1,31 +1,26 @@
+package hw3;
+
 import tester.*;
-import java.util.*;
 
 public class Examples {
 	Examples() {}
 	
-	WeatherMonitor w = new WeatherMonitor();
+	WeatherMonitor w = new WeatherMonitor(new ReportSet());
 	
 	boolean test1(Tester t) {
-		ReadingSet r1 = new ReadingSet(new ArrayList<Reading>());
-		r1.addReadings(new Reading(62.0, 12, 4), new Reading(40.6, 20, 16));
-		ReadingSet r2 = new ReadingSet(new ArrayList<Reading>());
-		r2.addReadings(new Reading(57.0, 12, 4), new Reading(34.3, 2, 32));
-		ReadingSet r3 = new ReadingSet(new ArrayList<Reading>());
-		r3.addReadings(new Reading(67.0, 12, 4), new Reading(42.9, 22, 56));
-		ReadingSet r4 = new ReadingSet(new ArrayList<Reading>());
-		r4.addReadings(new Reading(64.0, 12, 4), new Reading(32.3, 4, 24));
-		ReadingSet r5 = new ReadingSet(new ArrayList<Reading>());
-		r5.addReadings(new Reading(73.0, 8, 16), new Reading(60.0, 4 ,5));
+		ReadingSet r1 = new ReadingSet(new Reading(62.0, 12, 4), new Reading(40.6, 20, 16));
+		ReadingSet r2 = new ReadingSet(new Reading(57.0, 12, 4), new Reading(34.3, 2, 32));
+		ReadingSet r3 = new ReadingSet(new Reading(67.0, 12, 4), new Reading(42.9, 22, 56));
+		ReadingSet r4 = new ReadingSet(new Reading(64.0, 12, 4), new Reading(32.3, 4, 24));
+		ReadingSet r5 = new ReadingSet(new Reading(73.0, 8, 16), new Reading(60.0, 4 ,5));
 		
-		w.addReport(1987, 5, 6, r1);
-		w.addReport(1987, 5, 7, r2);
-		w.addReport(1987, 5, 8, r3);
-		w.addReport(1987, 5, 9, r4);
-		w.addReport(1993, 6, 8, r5);
+		w.addDailyReport(1987, 5, 6, r1);
+		w.addDailyReport(1987, 5, 7, r2);
+		w.addDailyReport(1987, 5, 8, r3);
+		w.addDailyReport(1987, 5, 9, r4);
+		w.addDailyReport(1993, 6, 8, r5);
 
-		ReadingSet testSet = new ReadingSet();
-		testSet.addReadings(new Reading(62.0, 12, 4), new Reading(40.6, 20, 16));
+		ReadingSet testSet = new ReadingSet(new Reading(62.0, 12, 4), new Reading(40.6, 20, 16));
 		return t.checkExpect(w.getReport(new Date(1987, 5, 6)),
 				new Report(new Date(1987, 5, 6), testSet));
 	}

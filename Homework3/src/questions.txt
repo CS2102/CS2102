@@ -1,6 +1,16 @@
-1.  We provide a report class. Users may extend this class and still maintain
-	the default functions needed by the weather monitor. They could change the type
-	of the data held in the LinkedList, or extend the Report class. They also could
-	extend WeatherMonitor itself.
+1.  We provide the IReportSet interface. Users may implement this interface and still maintain
+	the default functions needed by the weather monitor. They are able to change the type
+	of the data held in the ArrayList.
+	
+	To create a weatherGlob data structure implementation for the reports, we simply call the
+	WeatherMonitor constructor with a different initial IReportSet implementation.
 
-2.  No. Yes.
+
+2.  All instance variables are set to private access and there are no external methods that
+    modify their values. All computations are done internally in the classes that hold the
+    relevant data.
+  
+    
+3.  We are fairly satisfied with the current structure of the code, but there are some methods,
+    such as the averaging methods, which we feel could be generalized. However, at the moment,
+    we do not know how to do so.

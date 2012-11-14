@@ -1,3 +1,5 @@
+package hw3;
+
 public class Report {
 	private IReadingSet readings;
 	private Date date;

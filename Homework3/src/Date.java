@@ -1,3 +1,4 @@
+package hw3;
 
 public class Date {
 	private int year;
@@ -14,15 +15,19 @@ public class Date {
 		this.month = month;
 		this.day = day;
 	}
-
-	/**
-	 * @return boolean
-	 * if dates are same
-	 */
-	public boolean equals(Date d) {
-		return this.year == d.year && this.month == d.month && this.day == d.day; 
+	
+	@Override public boolean equals(Object o){
+		if(o == this)
+			return true;
+		if(!(o instanceof Date))
+			return false;
+		Date d = (Date) o;
+		return
+				d.year == year &&
+				d.month == month &&
+				d.day == day;
 	}
-	 
+
 	/**
 	 * @return the year
 	 */

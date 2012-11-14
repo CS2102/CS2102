@@ -1,21 +1,29 @@
+package hw3;
+
 import java.util.ArrayList;
 public class ReadingSet implements IReadingSet {
-	ArrayList<Reading> readings = new ArrayList<Reading>();
+	private ArrayList<Reading> readings = new ArrayList<Reading>();
 	
-	ReadingSet() {}
-	ReadingSet(ArrayList<Reading> r) {this.readings = r;}
+	//constructors
+	public ReadingSet(Reading reading) {
+		addReading(reading);
+	}
+	public ReadingSet(Reading... readings) {
+		addReadings(readings);
+	}
 	
-	public ReadingSet addReading(Reading r) {
+	private ReadingSet addReading(Reading r) {
 		readings.add(r);
 		return this;
 	}
 	
-	public ReadingSet addReadings(Reading ... readings) {
+	private ReadingSet addReadings(Reading ... readings) {
 		for (Reading r : readings) {
 			this.readings.add(r);
 		}
 		return this;
 	}
+	
 	public double getHigh() {
 		// set high to minimum value to ensure it is overwritten
 		double high = Double.MIN_VALUE;

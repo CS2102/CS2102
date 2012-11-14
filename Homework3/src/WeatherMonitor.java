@@ -1,62 +1,31 @@
-import java.util.LinkedList;
+package hw3;
 
 public class WeatherMonitor {
-	private LinkedList<Report> reports = new LinkedList<Report>();
+	
+	private IReportSet reports;
 	
 	/**
 	 * @param reports
 	 */
-	public WeatherMonitor() {}
-	
-	public WeatherMonitor(LinkedList<Report> reports) {
+	public WeatherMonitor(IReportSet reports) {
 		this.reports = reports;
 	}
 	
-	public WeatherMonitor addReport(int year, int month, int day, IReadingSet readingSet) {
-		this.reports.add(new Report(new Date(year, month, day), readingSet));
+	// methods
+	public Report getReport(Date d){
+		return reports.getReport(d);
+	}
+	
+	public WeatherMonitor addDailyReport(int year, int month, int day, IReadingSet readingSet) {
+		this.reports.addReport(new Report(new Date(year, month, day), readingSet));
 		return this;
 	}
 	
-	public Report getReport(Date d) {
-		for (Report r : this.reports) {
-			if (r.getDate().equals(d)) {
-				return r;
-			}
-		}
-		throw new RuntimeException("Date not found");
-	}
-	
 	public double averageHigh(int year, int month) {
-		double totalHigh = 0;
-		int totalDays = 0;
-		for (Report r : reports) {
-			if (r.getDate().getMonth() == month && r.getDate().getYear() == year) {
-				totalDays++;
-				totalHigh += r.getHigh();
-			}
-		}
-		if (totalDays != 0) {
-			return totalHigh / totalDays;
-		}
-		else {
-			throw new RuntimeException("No data for given month");
-		}
+		return reports.averageHigh(year, month);
 	}
 	
 	public double averageLow(int year, int month) {
-		double totalLow = 0;
-		int totalDays = 0;
-		for (Report r : reports) {
-			if (r.getDate().getMonth() == month && r.getDate().getYear() == year) {
-				totalDays++;
-				totalLow += r.getLow();
-			}
-		}
-		if (totalDays != 0) {
-			return totalLow / totalDays;
-		}
-		else {
-			throw new RuntimeException("No data for given month");
-		}
+		return reports.averageLow(year, month);
 	}
 }

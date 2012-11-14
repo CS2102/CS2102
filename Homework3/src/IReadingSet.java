@@ -1,6 +1,5 @@
-
+package hw3;
 public interface IReadingSet {
-	IReadingSet addReading(Reading r);
 	double getHigh();
 	double getLow();
 }
