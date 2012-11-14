@@ -19,20 +19,20 @@ public class Reading {
 	 * @return the temp
 	 */
 	public double getTemp() {
-		return temp;
+		return this.temp;
 	}
 
 	/**
 	 * @return the hour
 	 */
 	public int getHour() {
-		return hour;
+		return this.hour;
 	}
 
 	/**
 	 * @return the minute
 	 */
 	public int getMinute() {
-		return minute;
+		return this.minute;
 	}
 }

@@ -13,31 +13,31 @@ public class Report {
 	}
 
 	public double calcHigh() {
-		return readings.getHigh();
+		return this.readings.getHigh();
 	}
 
 	public double calcLow() {
-		return readings.getLow();
+		return this.readings.getLow();
 	}
 
 	/**
 	 * @return the date
 	 */
 	public Date getDate() {
-		return date;
+		return this.date;
 	}
 
 	/**
 	 * @return the high
 	 */
 	public double getHigh() {
-		return high;
+		return this.high;
 	}
 
 	/**
 	 * @return the low
 	 */
 	public double getLow() {
-		return low;
+		return this.low;
 	}
 }
