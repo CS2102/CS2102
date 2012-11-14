@@ -64,6 +64,12 @@ class DataHeap extends DataBT implements IHeap {
 	IHeap left;
 	IHeap right;
 
+	DataHeap(int data) {
+		super(data, new MtHeap(), new MtHeap());
+		this.left = new MtHeap();
+		this.right = new MtHeap();
+	}
+	
 	DataHeap(int data, IHeap left, IHeap right) {
 		super (data, left, right);
 		this.left = left;
