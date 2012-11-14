@@ -5,11 +5,17 @@ public class ReadingSet implements IReadingSet {
 	ReadingSet() {}
 	ReadingSet(ArrayList<Reading> r) {this.readings = r;}
 	
-	public IReadingSet addReading(Reading r) {
+	public ReadingSet addReading(Reading r) {
 		readings.add(r);
 		return this;
 	}
 	
+	public ReadingSet addReadings(Reading ... readings) {
+		for (Reading r : readings) {
+			this.readings.add(r);
+		}
+		return this;
+	}
 	public double getHigh() {
 		// set high to minimum value to ensure it is overwritten
 		double high = Double.MIN_VALUE;
@@ -25,7 +31,7 @@ public class ReadingSet implements IReadingSet {
 		// set low to maximum value to ensure it is overwritten
 				double low = Double.MAX_VALUE;
 				for (Reading reading : this.readings) {
-					if (reading.getTemp() > low) {
+					if (reading.getTemp() < low) {
 						low = reading.getTemp();
 					}
 				}
