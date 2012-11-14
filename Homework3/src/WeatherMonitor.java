@@ -12,8 +12,8 @@ public class WeatherMonitor {
 		this.reports = reports;
 	}
 	
-	public WeatherMonitor addReport(int year, int month, int day, Reading ... readings) {
-		this.reports.add(new Report(new Date(year, month, day), readings));
+	public WeatherMonitor addReport(int year, int month, int day, IReadingSet readingSet) {
+		this.reports.add(new Report(new Date(year, month, day), readingSet));
 		return this;
 	}
 	
