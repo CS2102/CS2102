@@ -1,19 +1,19 @@
 import java.lang.Math;
 
-interface IBinTree {
+interface IBinTree<T extends Comparable<T>> {
 	// determines whether element is in the tree
-	boolean hasElt(int e);
+	boolean hasElt(T e);
 	// returns number of nodes in the tree; counts duplicate elements as separate items
 	int size();
 	// returns depth of longest branch in the tree
 	int height();
 }
 
-class MtBT {
+class MtBT<T extends Comparable<T>> {
 	MtBT(){}
 
 	// returns false since empty tree has no elements
-	boolean hasElt(int e) {
+	boolean hasElt(T e) {
 		return false;
 	}
 
@@ -28,19 +28,19 @@ class MtBT {
 	}
 }
 
-class DataBT {
-	int data;
-	IBinTree left;
-	IBinTree right;
+class DataBT<T extends Comparable<T>> {
+	T data;
+	IBinTree<T> left;
+	IBinTree<T> right;
 
-	DataBT(int data, IBinTree left, IBinTree right) {
+	DataBT(T data, IBinTree<T> left, IBinTree<T> right) {
 		this.data = data;
 		this.left = left;
 		this.right = right;
 	}
 
 	// determines whether this node or node in subtree has given element
-	public boolean hasElt(int e) {
+	public boolean hasElt(T e) {
 		return this.data == e || this.left.hasElt(e) || this.right.hasElt(e) ;
 	}
 

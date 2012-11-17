@@ -1,114 +1,114 @@
 import java.util.Random;
 
 
-class TestHeap extends DataHeap {
-	IHeap left;
-	IHeap right;
+class TestHeap<T extends Comparable<T>> extends DataHeap<T> {
+	IHeap<T> left;
+	IHeap<T> right;
 
-	TestHeap(int data, IHeap left, IHeap right) {
+	TestHeap(T data, IHeap<T> left, IHeap<T> right) {
 		super(data, left, right);
 		this.left = left;
 		this.right = right;
 	}
 
 	@Override
-	public IHeap addElt(int e) {
-		return new TestHeap (e, this.left, this.right);
+	public IHeap<T> addElt(T e) {
+		return new TestHeap<T> (e, this.left, this.right);
 	}
 }
 
 
 
 
-class TestHeap2 extends DataHeap {
-	IHeap left;
-	IHeap right;
+class TestHeap2<T extends Comparable<T>> extends DataHeap<T> {
+	IHeap<T> left;
+	IHeap<T> right;
 
-	TestHeap2 (int data, IHeap left, IHeap right) {
+	TestHeap2 (T data, IHeap<T> left, IHeap<T> right) {
 		super (data, left, right);
 		this.left = left;
 		this.right = right;
 	}
 
 	@Override
-	public IHeap remMinElt() {
+	public IHeap<T> remMinElt() {
 		if (this.left.height() == 0 || this.right.height() == 0) {
 			return super.remMinElt();
 		} else {
-			return new TestHeap2 (data, this.left, this.right.remMinElt());
+			return new TestHeap2<T> (data, this.left, this.right.remMinElt());
 		}
 	}
 }
 
 
 
-class TestHeap3 extends DataHeap {
-	IHeap left;
-	IHeap right;
+class TestHeap3<T extends Comparable<T>> extends DataHeap<T> {
+	IHeap<T> left;
+	IHeap<T> right;
 
-	TestHeap3(int data, IHeap left, IHeap right) {
+	TestHeap3(T data, IHeap<T> left, IHeap<T> right) {
 		super (data, left, right);
 		this.left = left;
 		this.right = right;
 	}
 
 	@Override
-	public boolean isBigger(int e) {
-		return (this.data < e);
+	public boolean isBigger(T e) {
+		return (this.data.compareTo(e)>0);
 	}
 }
 
 
 
 
-class TestHeap4 extends DataHeap {
-	IHeap left;
-	IHeap right;
+class TestHeap4<T extends Comparable<T>> extends DataHeap<T> {
+	IHeap<T> left;
+	IHeap<T> right;
 
-	TestHeap4(int data, IHeap left, IHeap right) {
+	TestHeap4(T data, IHeap<T> left, IHeap<T> right) {
 		super (data, left, right);
 		this.left = left;
 		this.right = right;
 	}
 	
 	@Override
-	public IHeap addElt(int e) {
-		return this.merge(new DataHeap(e, new DataHeap(e, new MtHeap(), new MtHeap()), new MtHeap()));
+	public IHeap<T> addElt(T e) {
+		return this.merge(new DataHeap<T>(e, new DataHeap<T>(e, new MtHeap<T>(), new MtHeap<T>()), new MtHeap<T>()));
 	}
 }
 
 
 
-class TestHeap5 extends DataHeap {
-	IHeap left;
-	IHeap right;
+class TestHeap5 extends DataHeap<Integer> {//TODO Forced this to be a integer, as testheap5 is used specifically in this file to store integers
+	IHeap<Integer> left;
+	IHeap<Integer> right;
 
-	TestHeap5(int data, IHeap left, IHeap right) {
+	TestHeap5(Integer data, IHeap<Integer> left, IHeap<Integer> right) {
 		super (data, left, right);
 		this.left = left;
 		this.right = right;
 	}
 	
 	@Override
-	public IHeap remMinElt() {
+	public IHeap<Integer> remMinElt() {
 		return new TestHeap5 (0, this.right, this.left);
 	}
 }
 
 
 
-class TestHeap6 extends DataHeap {
-	IHeap left;
-	IHeap right;
+class TestHeap6 extends DataHeap<Integer> {
+	IHeap<Integer> left;
+	IHeap<Integer> right;
 
-	TestHeap6(int data, IHeap left, IHeap right) {
+	TestHeap6(Integer data, IHeap<Integer> left, IHeap<Integer> right) {
 		super (data, left, right);
 		this.left = left;
 		this.right = right;
 	}
 	
 	@Override
-	public IHeap addElt(int e) {
+	public IHeap<Integer> addElt(Integer e) {
 		Random newElt = new Random();
 		return new TestHeap5 (newElt.nextInt(), this.right, this.left);
 	}
