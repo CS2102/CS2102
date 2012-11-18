@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.Random;
 
 interface IHeap<T extends Comparable<T>> extends IBinTree<T> {
@@ -12,6 +13,17 @@ interface IHeap<T extends Comparable<T>> extends IBinTree<T> {
 	
 	// Determine if the root of this heap is bigger than the given element
 	boolean isBigger(T e);
+	
+	// for Tests
+	boolean isHeap();
+	
+	boolean isAddValid(T elem);
+	
+	boolean isRemMinValid();
+	
+	boolean isEmpty();
+	
+	LinkedList<T> toList();
 }
 
 class MtHeap<T extends Comparable<T>> implements IHeap<T> {
@@ -57,6 +69,33 @@ class MtHeap<T extends Comparable<T>> implements IHeap<T> {
 	// An empty heap merged with another heap is the other heap (identity).
 	public IHeap<T> merge(IHeap<T> withHeap) {
 		return withHeap;
+	}
+	
+	// Testers
+	public boolean isHeap(){
+		return true;
+	}
+	
+	public boolean isEmpty(){
+		return true;
+	}
+	
+	public boolean isAddValid(T elem){
+		IHeap<T> h = this.addElt(elem);
+		
+		if(h.isEmpty())
+			return false;
+		DataHeap<T> d = (DataHeap<T>) h;
+		return d.data == elem && d.left.isEmpty() && d.right.isEmpty();
+	}
+	
+	public boolean isRemMinValid() {
+		IHeap<T> h = this.remMinElt();
+		return h.isEmpty();
+	}
+	
+	public LinkedList<T> toList(){
+		return new LinkedList<T>();
 	}
 }
 
@@ -142,5 +181,38 @@ class DataHeap<T extends Comparable<T>> extends DataBT<T> implements IHeap<T> {
 	@Override
 	public boolean isBigger(T e) {
 		return (this.data.compareTo(e))>0;
+	}
+	
+	// Testers
+	public boolean isEmpty() {
+		return false;
+	}
+	
+	public boolean isHeap(){
+		return this.left.isBigger(this.data) &&
+				this.right.isBigger(this.data) &&
+				this.left.isHeap() &&
+				this.right.isHeap();
+	}
+	
+	public boolean isAddValid(T e) {
+		IHeap<T> h = this.addElt(e);
+		LinkedList<T> origElems = this.toList();
+		origElems.add(e);
+		LinkedList<T> newElems = h.toList();
+		// make sure that the original and new lists are identical
+		
+	}
+	
+	public boolean isRemMinValid(){
+		
+	}
+	
+	public LinkedList<T> toList(){
+		LinkedList<T> leftList = this.left.toList(), 
+				rightList = this.right.toList();
+		leftList.add(this.data);
+		leftList.addAll(rightList);
+		return leftList;
 	}
 }
