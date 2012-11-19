@@ -2,11 +2,11 @@
 import java.util.Random;
 
 
-class TestHeap<T extends Comparable<T>> extends DataHeap<T> {
+class TestHeap1<T extends Comparable<T>> extends DataHeap<T> {
 	IHeap<T> left;
 	IHeap<T> right;
 
-	TestHeap(T data, IHeap<T> left, IHeap<T> right) {
+	TestHeap1(T data, IHeap<T> left, IHeap<T> right) {
 		super(data, left, right);
 		this.left = left;
 		this.right = right;
@@ -14,7 +14,7 @@ class TestHeap<T extends Comparable<T>> extends DataHeap<T> {
 
 	@Override
 	public IHeap<T> addElt(T e) {
-		return new TestHeap<T> (e, this.left, this.right);
+		return new TestHeap1<T> (e, this.left, this.right);
 	}
 }
 
@@ -55,7 +55,8 @@ class TestHeap3<T extends Comparable<T>> extends DataHeap<T> {
 
 	@Override
 	public boolean isBigger(T e) {
-		return (this.data.compareTo(e)>0);
+		// Had to "fix" this so code would compile, as '<' is not defined for type T
+		return (this.data.compareTo(e)<0);
 	}
 }
 
@@ -79,8 +80,8 @@ class TestHeap4<T extends Comparable<T>> extends DataHeap<T> {
 }
 
 
-
-class TestHeap5 extends DataHeap<Integer> {//TODO Forced this to be a integer, as testheap5 is used specifically in this file to store integers
+//Forced this to be a integer, as testheap5 is used specifically in this file to store integers
+class TestHeap5 extends DataHeap<Integer> {
 	IHeap<Integer> left;
 	IHeap<Integer> right;
 

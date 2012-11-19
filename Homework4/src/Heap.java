@@ -180,7 +180,7 @@ class DataHeap<T extends Comparable<T>> extends DataBT<T> implements IHeap<T> {
 
 	@Override
 	public boolean isBigger(T e) {
-		return (this.data.compareTo(e))>0;
+		return (this.data.compareTo(e)) >= 0;
 	}
 
 	// Testers
@@ -219,6 +219,7 @@ class DataHeap<T extends Comparable<T>> extends DataBT<T> implements IHeap<T> {
 			if(min.compareTo(origElems.get(i)) > 0)
 				min = origElems.get(i);
 		}
+		
 		// now min is the minimum valued element in the original list
 		origElems.remove(min);
 
@@ -230,6 +231,7 @@ class DataHeap<T extends Comparable<T>> extends DataBT<T> implements IHeap<T> {
 				return false;
 			newElems.remove(origElems.get(i));
 		}
+		
 		return newElems.isEmpty() &&
 				h.isHeap();
 	}
