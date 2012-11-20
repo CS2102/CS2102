@@ -1,9 +1,111 @@
+package hwk4;
 import tester.Tester;
 
 public class Examples {
 	Examples() {}
 	
+	// Methods to initialize data
+	public DataHeap<Integer> createDefaultHeap1(){
+		return new DataHeap<Integer>(2, 
+			new DataHeap<Integer>(5, 
+					new DataHeap<Integer>(6, 
+						new MtHeap<Integer>(), 
+						new MtHeap<Integer>()
+						),
+						new DataHeap<Integer>(7,
+							new MtHeap<Integer>(),
+							new MtHeap<Integer>()
+							)
+					),
+					new MtHeap<Integer>()
+			);
+	}
 	
+	public DataHeap<Integer> createDefaultHeap2(){
+		return new DataHeap<Integer>(2, 
+				new DataHeap<Integer>(5, 
+						new DataHeap<Integer>(6, 
+							new MtHeap<Integer>(), 
+							new MtHeap<Integer>()
+						),
+					new DataHeap<Integer>(7,
+						new MtHeap<Integer>(),
+						new MtHeap<Integer>()
+					)
+				),
+				new DataHeap<Integer>(3,
+					new DataHeap<Integer>(7,
+						new MtHeap<Integer>(),
+						new DataHeap<Integer>(52,
+							new MtHeap<Integer>(),
+							new MtHeap<Integer>()
+						)
+					),
+					new DataHeap<Integer>(6,
+						new MtHeap<Integer>(),
+						new MtHeap<Integer>()
+					)
+				)
+			);
+	}
+	
+	public TestHeap1<Integer> createDefaultHeap3(){
+		return new TestHeap1<Integer>(2, 
+				new TestHeap1<Integer>(5, 
+						new TestHeap1<Integer>(6, 
+							new MtHeap<Integer>(), 
+							new MtHeap<Integer>()
+						),
+					new TestHeap1<Integer>(7,
+						new MtHeap<Integer>(),
+						new MtHeap<Integer>()
+					)
+				),
+				new TestHeap1<Integer>(3,
+					new TestHeap1<Integer>(7,
+						new MtHeap<Integer>(),
+						new TestHeap1<Integer>(52,
+							new MtHeap<Integer>(),
+							new MtHeap<Integer>()
+						)
+					),
+					new TestHeap1<Integer>(6,
+						new MtHeap<Integer>(),
+						new MtHeap<Integer>()
+					)
+				)
+			);
+	}
+	
+	public TestHeap3<Integer> createDefaultHeap4(){
+		return new TestHeap3<Integer>(2, 
+				new TestHeap3<Integer>(5, 
+						new TestHeap3<Integer>(6, 
+							new MtHeap<Integer>(), 
+							new MtHeap<Integer>()
+							),
+							new TestHeap3<Integer>(7,
+								new MtHeap<Integer>(),
+								new MtHeap<Integer>()
+								)
+						),
+						new TestHeap3<Integer>(3,
+							new TestHeap3<Integer>(7,
+								new MtHeap<Integer>(),
+								new TestHeap3<Integer>(52,
+										new MtHeap<Integer>(),
+										new MtHeap<Integer>()
+										)
+								),
+									new TestHeap3<Integer>(6,
+										new MtHeap<Integer>(),
+										new MtHeap<Integer>()
+											)
+								)
+				);
+	}
+	
+	// Tests
 	boolean test1(Tester t) {
 		MtHeap<Integer> h = new MtHeap<Integer>();
 		return t.checkExpect(h.isAddValid(5), true);
@@ -16,184 +118,48 @@ public class Examples {
 	}
 	
 	boolean test3(Tester t) {
-		DataHeap<Integer> h = new DataHeap<Integer>(3, new MtHeap<Integer>(), new MtHeap<Integer>());
+		DataHeap<Integer> h = new DataHeap<Integer>(3, 
+			new MtHeap<Integer>(), new MtHeap<Integer>());
 		return t.checkExpect(h.isRemMinValid(), true);
 	}
 	
 	boolean test4(Tester t) {
-		DataHeap<Integer> h = 
-			new DataHeap<Integer>(2, 
-				new DataHeap<Integer>(5, 
-					new DataHeap<Integer>(6, 
-						new MtHeap<Integer>(), 
-						new MtHeap<Integer>()
-					),
-					new DataHeap<Integer>(7,
-						new MtHeap<Integer>(),
-						new MtHeap<Integer>()
-					)
-				),
-				new MtHeap<Integer>()
-			);
+		DataHeap<Integer> h = createDefaultHeap1();
 		return t.checkExpect(h.isHeap(), true);
 	}
 
 	boolean test5(Tester t) {
-		DataHeap<Integer> h = 
-			new DataHeap<Integer>(2, 
-				new DataHeap<Integer>(5, 
-					new DataHeap<Integer>(6, 
-						new MtHeap<Integer>(), 
-						new MtHeap<Integer>()
-					),
-					new DataHeap<Integer>(7,
-						new MtHeap<Integer>(),
-						new MtHeap<Integer>()
-					)
-				),
-				new MtHeap<Integer>()
-			);
+		DataHeap<Integer> h = createDefaultHeap1();
 		return t.checkExpect(h.isAddValid(4), true);
 	}
 
 	boolean test6(Tester t) {
-		DataHeap<Integer> h = 
-			new DataHeap<Integer>(2, 
-				new DataHeap<Integer>(5, 
-					new DataHeap<Integer>(6, 
-						new MtHeap<Integer>(), 
-						new MtHeap<Integer>()
-					),
-					new DataHeap<Integer>(7,
-						new MtHeap<Integer>(),
-						new MtHeap<Integer>()
-					)
-				),
-				new MtHeap<Integer>()
-			);
+		DataHeap<Integer> h = createDefaultHeap1();
 		return t.checkExpect(h.isRemMinValid(), true);
 	}
 
 	boolean test7(Tester t) {
-		DataHeap<Integer> h = 
-			new DataHeap<Integer>(2, 
-				new DataHeap<Integer>(5, 
-					new DataHeap<Integer>(6, 
-						new MtHeap<Integer>(), 
-						new MtHeap<Integer>()
-					),
-				new DataHeap<Integer>(7,
-					new MtHeap<Integer>(),
-					new MtHeap<Integer>()
-				)
-			),
-			new DataHeap<Integer>(3,
-				new DataHeap<Integer>(7,
-					new MtHeap<Integer>(),
-					new DataHeap<Integer>(52,
-						new MtHeap<Integer>(),
-						new MtHeap<Integer>()
-					)
-				),
-				new DataHeap<Integer>(6,
-					new MtHeap<Integer>(),
-					new MtHeap<Integer>()
-				)
-			)
-		);
+		DataHeap<Integer> h = createDefaultHeap2();
 		return t.checkExpect(h.isRemMinValid(), true);
 	}
 
 	boolean test8(Tester t) {
-		DataHeap<Integer> h = 
-			new DataHeap<Integer>(2, 
-				new DataHeap<Integer>(5, 
-					new DataHeap<Integer>(6, 
-						new MtHeap<Integer>(), 
-						new MtHeap<Integer>()
-					),
-				new DataHeap<Integer>(7,
-					new MtHeap<Integer>(),
-					new MtHeap<Integer>()
-				)
-			),
-			new DataHeap<Integer>(3,
-				new DataHeap<Integer>(7,
-					new MtHeap<Integer>(),
-					new DataHeap<Integer>(52,
-						new MtHeap<Integer>(),
-						new MtHeap<Integer>()
-					)
-				),
-				new DataHeap<Integer>(6,
-					new MtHeap<Integer>(),
-					new MtHeap<Integer>()
-				)
-			)
-		);
+		DataHeap<Integer> h = createDefaultHeap2();
 		return t.checkExpect(h.isAddValid(99), true);
 	}
 
 	boolean test9(Tester t) {
-		DataHeap<Integer> h = 
-			new DataHeap<Integer>(2, 
-				new DataHeap<Integer>(5, 
-					new DataHeap<Integer>(6, 
-						new MtHeap<Integer>(), 
-						new MtHeap<Integer>()
-					),
-				new DataHeap<Integer>(7,
-					new MtHeap<Integer>(),
-					new MtHeap<Integer>()
-				)
-			),
-			new DataHeap<Integer>(3,
-				new DataHeap<Integer>(7,
-					new MtHeap<Integer>(),
-					new DataHeap<Integer>(52,
-						new MtHeap<Integer>(),
-						new MtHeap<Integer>()
-					)
-				),
-				new DataHeap<Integer>(6,
-					new MtHeap<Integer>(),
-					new MtHeap<Integer>()
-				)
-			)
-		);
+		DataHeap<Integer> h = createDefaultHeap2();
 		return t.checkExpect(h.isAddValid(1), true);
 	}
 
 	boolean test10(Tester t) {
-		TestHeap1<Integer> h = 
-			new TestHeap1<Integer>(2, 
-				new TestHeap1<Integer>(5, 
-					new TestHeap1<Integer>(6, 
-						new MtHeap<Integer>(), 
-						new MtHeap<Integer>()
-					),
-				new TestHeap1<Integer>(7,
-					new MtHeap<Integer>(),
-					new MtHeap<Integer>()
-				)
-			),
-			new TestHeap1<Integer>(3,
-				new TestHeap1<Integer>(7,
-					new MtHeap<Integer>(),
-					new TestHeap1<Integer>(52,
-						new MtHeap<Integer>(),
-						new MtHeap<Integer>()
-					)
-				),
-				new TestHeap1<Integer>(6,
-					new MtHeap<Integer>(),
-					new MtHeap<Integer>()
-				)
-			)
-		);
+		TestHeap1<Integer> h = createDefaultHeap3();
 		return t.checkExpect(h.isAddValid(1), false);
 	}
 
+	// The Heaps used in tests 11-14 are not reused, thus they don't have convenience methods
+	// to create them.
 	boolean test11(Tester t) {
 		TestHeap4<Integer> h = 
 				new TestHeap4<Integer>(2, 
@@ -315,122 +281,22 @@ public class Examples {
 	}
 
 	boolean test15(Tester t) {
-		TestHeap3<Integer> h = 
-				new TestHeap3<Integer>(2, 
-						new TestHeap3<Integer>(5, 
-								new TestHeap3<Integer>(6, 
-										new MtHeap<Integer>(), 
-										new MtHeap<Integer>()
-										),
-										new TestHeap3<Integer>(7,
-												new MtHeap<Integer>(),
-												new MtHeap<Integer>()
-												)
-								),
-								new TestHeap3<Integer>(3,
-										new TestHeap3<Integer>(7,
-												new MtHeap<Integer>(),
-												new TestHeap3<Integer>(52,
-														new MtHeap<Integer>(),
-														new MtHeap<Integer>()
-														)
-												),
-												new TestHeap3<Integer>(6,
-														new MtHeap<Integer>(),
-														new MtHeap<Integer>()
-														)
-										)
-						);
+		TestHeap3<Integer> h = createDefaultHeap4();
 		return t.checkExpect(h.isRemMinValid(), false);
 	}
 	
 	boolean test16(Tester t) {
-		TestHeap3<Integer> h = 
-				new TestHeap3<Integer>(2, 
-						new TestHeap3<Integer>(5, 
-								new TestHeap3<Integer>(6, 
-										new MtHeap<Integer>(), 
-										new MtHeap<Integer>()
-										),
-										new TestHeap3<Integer>(7,
-												new MtHeap<Integer>(),
-												new MtHeap<Integer>()
-												)
-								),
-								new TestHeap3<Integer>(3,
-										new TestHeap3<Integer>(7,
-												new MtHeap<Integer>(),
-												new TestHeap3<Integer>(52,
-														new MtHeap<Integer>(),
-														new MtHeap<Integer>()
-														)
-												),
-												new TestHeap3<Integer>(6,
-														new MtHeap<Integer>(),
-														new MtHeap<Integer>()
-														)
-										)
-						);
+		TestHeap3<Integer> h = createDefaultHeap4();
 		return t.checkExpect(h.isAddValid(1), false);
 	}
 
 	boolean test17(Tester t) {
-		TestHeap3<Integer> h = 
-				new TestHeap3<Integer>(2, 
-						new TestHeap3<Integer>(5, 
-								new TestHeap3<Integer>(6, 
-										new MtHeap<Integer>(), 
-										new MtHeap<Integer>()
-										),
-										new TestHeap3<Integer>(7,
-												new MtHeap<Integer>(),
-												new MtHeap<Integer>()
-												)
-								),
-								new TestHeap3<Integer>(3,
-										new TestHeap3<Integer>(7,
-												new MtHeap<Integer>(),
-												new TestHeap3<Integer>(52,
-														new MtHeap<Integer>(),
-														new MtHeap<Integer>()
-														)
-												),
-												new TestHeap3<Integer>(6,
-														new MtHeap<Integer>(),
-														new MtHeap<Integer>()
-														)
-										)
-						);
+		TestHeap3<Integer> h = createDefaultHeap4();
 		return t.checkExpect(h.isAddValid(20), false);
 	}
 
 	boolean test18(Tester t) {
-		TestHeap3<Integer> h = 
-				new TestHeap3<Integer>(2, 
-						new TestHeap3<Integer>(5, 
-								new TestHeap3<Integer>(6, 
-										new MtHeap<Integer>(), 
-										new MtHeap<Integer>()
-										),
-										new TestHeap3<Integer>(7,
-												new MtHeap<Integer>(),
-												new MtHeap<Integer>()
-												)
-								),
-								new TestHeap3<Integer>(3,
-										new TestHeap3<Integer>(7,
-												new MtHeap<Integer>(),
-												new TestHeap3<Integer>(52,
-														new MtHeap<Integer>(),
-														new MtHeap<Integer>()
-														)
-												),
-												new TestHeap3<Integer>(6,
-														new MtHeap<Integer>(),
-														new MtHeap<Integer>()
-														)
-										)
-						);
+		TestHeap3<Integer> h = createDefaultHeap4();
 		return t.checkExpect(h.isHeap(), false);
 	}
 }
