@@ -1,0 +1,14 @@
+
+class Plus implements IFormula {
+	IFormula left;
+	IFormula right;
+
+	Plus(IFormula left, IFormula right) {
+		this.left = left;
+		this.right = right;
+	}
+
+	public <R> R traverse(IProc<R> f) {
+		return f.processPlus(this.left.traverse(f), this.right.traverse(f));
+	}
+}

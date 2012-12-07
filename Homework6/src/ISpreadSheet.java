@@ -1,0 +1,5 @@
+
+interface ISpreadSheet {
+	void editContents(String cellname, IFormula expr);
+	Integer lookupValue(String forcell);
+}

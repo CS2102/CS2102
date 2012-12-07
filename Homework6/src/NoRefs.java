@@ -1,0 +1,14 @@
+
+class NoRefs implements IProc<Boolean> {
+	public Boolean processNum(Num n) {
+		return true;
+	}
+
+	public Boolean processCellRef(CellRef c) {
+		return false;
+	}
+
+	public Boolean processPlus(Boolean leftres, Boolean rightres) {
+		return leftres && rightres;
+	}
+}
