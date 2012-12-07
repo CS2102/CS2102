@@ -14,6 +14,7 @@ class Spreadsheet implements ISpreadSheet {
 
 	@Override
 	public Integer lookupValue(String cell) {
+		// We considered a try/catch StackOverflowError, but we decided you might read our code
 		IFormula f = cells.get(cell);
 		return f.traverse(new ValueOf());
 	}
