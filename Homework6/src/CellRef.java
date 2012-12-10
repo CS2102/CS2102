@@ -1,6 +1,6 @@
 
 class CellRef implements IFormula {
-	String cellname;
+	private String cellname;
 
 	CellRef(String cellname) {
 		this.cellname = cellname;
@@ -8,5 +8,9 @@ class CellRef implements IFormula {
 
 	public <R> R traverse(IProc<R> f) {
 		return f.processCellRef(this);
+	}
+	
+	public String getCellName() {
+		return this.cellname;
 	}
 }
