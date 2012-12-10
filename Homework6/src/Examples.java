@@ -2,7 +2,7 @@ import tester.*;
 
 class Examples {
 	Examples() {}
-	
+
 	Spreadsheet initS() throws CircularRefsException {
 		Spreadsheet s = new Spreadsheet();
 		s.editContents("a10", new Num(5));
@@ -11,7 +11,7 @@ class Examples {
 				new CellRef("b10")));
 		return s;
 	}
-	
+
 	boolean testLookup(Tester t) throws CircularRefsException {
 		Spreadsheet s = initS();
 		return t.checkExpect(s.lookupValue("c10"), 8);
@@ -19,10 +19,10 @@ class Examples {
 
 	boolean testLookup2(Tester t) throws CircularRefsException {
 		Spreadsheet s = initS();
-	    s.editContents("a10", new Num(9));
+		s.editContents("a10", new Num(9));
 		return t.checkExpect(s.lookupValue("c10"), 12);
 	}
-	
+
 	boolean testCircularFailure(Tester t)
 	{
 		boolean hasCyclicRef = false;

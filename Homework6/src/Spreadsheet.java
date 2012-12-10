@@ -27,7 +27,7 @@ class Spreadsheet implements ISpreadSheet {
 		IFormula f = cells.get(cell);
 		return f.traverse(new ValueOf(this));
 	}
-	
+
 	/**
 	 * Handles traversal on specified key with specified procedure
 	 * @param key

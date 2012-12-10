@@ -1,7 +1,7 @@
 
 class ValueOf implements IProc<Integer> {
 	private Spreadsheet spread;
-	
+
 	/**
 	 * @param spread The spreadsheet from which all cell references will be evaluated
 	 */

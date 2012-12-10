@@ -9,7 +9,7 @@ class CellRef implements IFormula {
 	public <R> R traverse(IProc<R> f) {
 		return f.processCellRef(this);
 	}
-	
+
 	public String getCellName() {
 		return this.cellname;
 	}
