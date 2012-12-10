@@ -9,6 +9,12 @@ class Plus implements IFormula {
 	}
 
 	public <R> R traverse(IProc<R> f) {
-		return f.processPlus(this.left.traverse(f), this.right.traverse(f));
+		if (this.left.equals(this.right))
+		{
+			R result = this.left.traverse(f);
+			return f.processPlus(result, result);
+		}
+		else
+			return f.processPlus(this.left.traverse(f), this.right.traverse(f));
 	}
 }
