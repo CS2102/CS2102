@@ -1,0 +1,27 @@
+(a) We decided it would be better to handle cyclic references in the editContents 
+method to avoid the problem in the first place, rather than letting the user think
+it worked until they try to look up the value.
+
+
+(b) The valueOf method will terminate in the face of a cyclic cell reference because
+editContents will not allow a cyclic cell reference to be entered into the 
+spreadsheet in the first place. editContents will terminate given our implementation, because
+it first calls traverse on the CellRef with a new ValidateRefs object. 
+
+This ValidateRefs object has a newly created LinkedList<CellRef> to keep track of CellRefs that 
+were previously visited. Each time a CellRef refers to another CellRef, it is first added to the
+visited list, and then the spreadsheet's traverse method calls traverse on the next cell, passing 
+the same ValidateRefs object through (thus its list contains all previously visited cells). If 
+at any point there is a cyclic reference, this will be found by ValidateRefs' processCellRef 
+method, which will detect a duplicate in the list and then return false. This will cause 
+editContents to throw an exception.
+
+Since the number of cells in the spreadsheet must be finite, eventually CellRefs will resolve 
+to a Number or Plus reference, or result in an exception. Thus, valueOf is guaranteed to 
+terminate.
+
+
+(c) Yes. In particular, using a visitor organization for ValueOf allowed us to pass it a
+reference to the current spreadsheet in the constructor. If changes needed to be made to the
+parameters required by ValueOf later on, using the visitor design pattern allows these changes
+to be made in one place rather than in each of the Num, CellRef, and Plus classes.
